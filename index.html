@@ -1,0 +1,1385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ontivisions — Premium Sports Photography</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    /* =============================================
+       RESET & BASE
+    ============================================= */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #0a0a0a;
+      color: #f0f0f0;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* =============================================
+       CSS VARIABLES
+    ============================================= */
+    :root {
+      --black:       #0a0a0a;
+      --black-soft:  #111111;
+      --gray-dark:   #161616;
+      --gray-mid:    #1e1e1e;
+      --gray-light:  #2a2a2a;
+      --white:       #f0f0f0;
+      --white-muted: rgba(240, 240, 240, 0.55);
+      --blue:        #1a8cff;
+      --blue-bright: #3da5ff;
+      --blue-glow:   rgba(26, 140, 255, 0.15);
+      --silver:      #c0c8d4;
+      --accent-line: rgba(26, 140, 255, 0.3);
+    }
+
+    /* =============================================
+       TYPOGRAPHY
+    ============================================= */
+    h1, h2, h3, .display {
+      font-family: 'Bebas Neue', sans-serif;
+      letter-spacing: 0.02em;
+      line-height: 0.95;
+    }
+
+    /* =============================================
+       UTILITY
+    ============================================= */
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    .eyebrow {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--blue);
+      display: block;
+      margin-bottom: 16px;
+    }
+    .btn {
+      display: inline-block;
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 14px 32px;
+      border-radius: 3px;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s ease;
+    }
+    .btn-primary {
+      background: var(--blue);
+      color: #fff;
+    }
+    .btn-primary:hover {
+      background: var(--blue-bright);
+      transform: translateY(-2px);
+    }
+    .btn-outline {
+      background: transparent;
+      color: var(--white);
+      border: 1.5px solid rgba(240,240,240,0.3);
+    }
+    .btn-outline:hover {
+      border-color: var(--blue);
+      color: var(--blue);
+      transform: translateY(-2px);
+    }
+
+    /* =============================================
+       STICKY MOBILE CTA
+    ============================================= */
+    .sticky-cta {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 999;
+      padding: 12px 20px;
+      background: rgba(10,10,10,0.97);
+      border-top: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      gap: 10px;
+    }
+    .sticky-cta .btn {
+      flex: 1;
+      text-align: center;
+      font-size: 13px;
+      padding: 13px 16px;
+    }
+    @media (min-width: 768px) {
+      .sticky-cta { display: none; }
+    }
+
+    /* =============================================
+       NAV
+    ============================================= */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 18px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: transparent;
+      transition: background 0.3s ease;
+    }
+    nav.scrolled {
+      background: rgba(10,10,10,0.95);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      backdrop-filter: blur(12px);
+    }
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 26px;
+      color: var(--white);
+      letter-spacing: 0.06em;
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--blue); }
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--white-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--blue); }
+    @media (max-width: 640px) {
+      .nav-links { display: none; }
+    }
+
+    /* =============================================
+       HERO
+    ============================================= */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--black);
+      overflow: hidden;
+      padding: 0 20px;
+    }
+
+    /* Diagonal grid texture */
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(26,140,255,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(26,140,255,0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+    }
+
+    /* Blue glow burst */
+    .hero-glow {
+      position: absolute;
+      width: 700px;
+      height: 700px;
+      border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(26,140,255,0.12) 0%, transparent 70%);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -55%);
+      pointer-events: none;
+    }
+
+    /* Placeholder photo block */
+    .hero-photo {
+      position: absolute;
+      inset: 0;
+      opacity: 0.18;
+      background: linear-gradient(135deg, #1a2a3a 0%, #0a0a0a 60%);
+      pointer-events: none;
+    }
+    /* Replace .hero-photo background with: background: url('your-hero.jpg') center/cover; */
+
+    /* Diagonal slash accent */
+    .hero-slash {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 40%;
+      height: 100%;
+      background: linear-gradient(165deg, rgba(26,140,255,0.06) 0%, transparent 50%);
+      clip-path: polygon(30% 0%, 100% 0%, 100% 100%, 0% 100%);
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      max-width: 820px;
+      padding-top: 80px;
+    }
+
+    .hero h1 {
+      font-size: clamp(72px, 14vw, 130px);
+      color: var(--white);
+      line-height: 0.92;
+      margin-bottom: 24px;
+    }
+    .hero h1 .blue { color: var(--blue); }
+    .hero h1 .thin {
+      font-family: 'Inter', sans-serif;
+      font-weight: 800;
+      font-size: clamp(14px, 2.5vw, 22px);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--white-muted);
+      display: block;
+      line-height: 1;
+      margin-bottom: 10px;
+    }
+
+    .hero-sub {
+      font-size: clamp(14px, 2.2vw, 17px);
+      color: var(--white-muted);
+      max-width: 540px;
+      margin: 0 auto 36px;
+      line-height: 1.65;
+    }
+
+    .hero-btns {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* Animated bar at bottom */
+    .hero-bar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--blue), var(--blue-bright), transparent);
+      animation: barSweep 3s ease-in-out infinite;
+    }
+    @keyframes barSweep {
+      0%, 100% { opacity: 0.4; transform: scaleX(0.6); }
+      50% { opacity: 1; transform: scaleX(1); }
+    }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+    }
+    .scroll-hint span {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--white-muted);
+    }
+    .scroll-hint svg { animation: bounce 2.2s ease-in-out infinite; }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); opacity: 0.4; }
+      50% { transform: translateY(6px); opacity: 1; }
+    }
+
+    /* =============================================
+       INTRO STRIP
+    ============================================= */
+    .intro {
+      background: var(--gray-dark);
+      border-top: 1px solid rgba(255,255,255,0.06);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      padding: 56px 20px;
+      text-align: center;
+    }
+    .intro p {
+      max-width: 640px;
+      margin: 0 auto;
+      font-size: clamp(15px, 2.2vw, 18px);
+      line-height: 1.7;
+      color: var(--white-muted);
+    }
+    .intro p strong { color: var(--white); font-weight: 700; }
+
+    /* Stat strip */
+    .stat-strip {
+      display: flex;
+      justify-content: center;
+      gap: 48px;
+      margin-top: 40px;
+      flex-wrap: wrap;
+    }
+    .stat {
+      text-align: center;
+    }
+    .stat-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 48px;
+      color: var(--blue);
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--white-muted);
+      margin-top: 4px;
+    }
+
+    /* =============================================
+       PACKAGES
+    ============================================= */
+    .packages {
+      background: var(--black);
+      padding: 80px 20px 100px;
+    }
+    .section-header {
+      text-align: center;
+      margin-bottom: 52px;
+    }
+    .section-header h2 {
+      font-size: clamp(52px, 9vw, 88px);
+      color: var(--white);
+      margin-bottom: 12px;
+    }
+    .section-header p {
+      color: var(--white-muted);
+      font-size: 15px;
+      max-width: 440px;
+      margin: 0 auto;
+    }
+
+    .packages-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    @media (max-width: 600px) {
+      .packages-grid { grid-template-columns: 1fr; }
+    }
+
+    .pkg-card {
+      background: var(--gray-dark);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 6px;
+      overflow: hidden;
+      transition: border-color 0.25s, transform 0.25s;
+      position: relative;
+    }
+    .pkg-card:hover {
+      border-color: var(--blue);
+      transform: translateY(-4px);
+    }
+    .pkg-card.featured {
+      border-color: var(--blue);
+      grid-column: span 1;
+    }
+    .pkg-card.featured::before {
+      content: 'MOST POPULAR';
+      position: absolute;
+      top: 0;
+      right: 0;
+      background: var(--blue);
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      padding: 5px 14px;
+      border-radius: 0 6px 0 6px;
+    }
+
+    /* Placeholder photo inside package card */
+    .pkg-photo {
+      width: 100%;
+      height: 140px;
+      background: linear-gradient(135deg, #1a2030 0%, #0d0d0d 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .pkg-photo::after {
+      content: 'PHOTO';
+      font-family: 'Inter', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      color: rgba(255,255,255,0.15);
+    }
+    /* Replace .pkg-photo background with: background: url('your-photo.jpg') center/cover no-repeat; */
+    .pkg-photo-bar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--blue);
+      opacity: 0;
+      transition: opacity 0.25s;
+    }
+    .pkg-card:hover .pkg-photo-bar { opacity: 1; }
+
+    .pkg-body {
+      padding: 24px 22px 28px;
+    }
+    .pkg-badge {
+      font-family: 'Inter', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 8px;
+    }
+    .pkg-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 34px;
+      color: var(--white);
+      line-height: 1;
+      margin-bottom: 14px;
+    }
+    .pkg-features {
+      list-style: none;
+      margin-bottom: 22px;
+    }
+    .pkg-features li {
+      font-size: 13px;
+      color: var(--white-muted);
+      padding: 6px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      line-height: 1.4;
+    }
+    .pkg-features li::before {
+      content: '';
+      display: inline-block;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--blue);
+      flex-shrink: 0;
+      margin-top: 5px;
+    }
+    .pkg-price {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 42px;
+      color: var(--white);
+      line-height: 1;
+    }
+    .pkg-price span {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--white-muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-left: 6px;
+      vertical-align: middle;
+    }
+
+    /* =============================================
+       ADD-ONS
+    ============================================= */
+    .addons {
+      background: var(--gray-dark);
+      padding: 72px 20px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .addons-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+    @media (max-width: 700px) {
+      .addons-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 400px) {
+      .addons-grid { grid-template-columns: 1fr; }
+    }
+    .addon-chip {
+      background: var(--gray-mid);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 4px;
+      padding: 18px 16px;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .addon-chip:hover {
+      border-color: var(--blue);
+      background: rgba(26,140,255,0.05);
+    }
+    .addon-chip-icon {
+      font-size: 22px;
+      margin-bottom: 10px;
+    }
+    .addon-chip-name {
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 4px;
+    }
+    .addon-chip-desc {
+      font-size: 11px;
+      color: var(--white-muted);
+      line-height: 1.45;
+    }
+
+    /* =============================================
+       BOOKING FORM
+    ============================================= */
+    .booking {
+      background: var(--black);
+      padding: 80px 20px 120px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .form-wrapper {
+      background: var(--gray-dark);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 8px;
+      padding: 40px 32px;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+    @media (max-width: 480px) {
+      .form-wrapper { padding: 28px 20px; }
+    }
+
+    /* 
+      CONNECT FORMSPREE:
+      1. Go to formspree.io, create a free account
+      2. Create a new form, copy your endpoint URL
+      3. Replace action="#" below with your endpoint: action="https://formspree.io/f/YOUR_ID"
+      4. Remove the JS preventDefault and success-message logic if you want full redirect
+      
+      CONNECT GOOGLE FORMS:
+      1. Create a Google Form, click the three dots → Get pre-filled link
+      2. Map field names to the hidden input names in your Google Form
+      3. Change method="POST" and action to your Google Form action URL
+      
+      CONNECT EMAIL (Netlify Forms):
+      1. Add netlify to the <form> tag if deploying on Netlify: <form netlify>
+      2. Add a hidden input: <input type="hidden" name="form-name" value="booking">
+    */
+    .booking-form {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    @media (max-width: 540px) {
+      .form-row { grid-template-columns: 1fr; gap: 0; }
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 14px;
+    }
+    .form-group label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--white-muted);
+      margin-bottom: 7px;
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      background: var(--gray-mid);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 4px;
+      padding: 13px 14px;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      color: var(--white);
+      transition: border-color 0.2s;
+      outline: none;
+      -webkit-appearance: none;
+      appearance: none;
+      width: 100%;
+    }
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+      color: rgba(240,240,240,0.25);
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--blue);
+    }
+    .form-group select {
+      cursor: pointer;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23888' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      padding-right: 36px;
+    }
+    .form-group select option { background: #1e1e1e; color: #f0f0f0; }
+    .form-group textarea {
+      resize: vertical;
+      min-height: 100px;
+      line-height: 1.5;
+    }
+
+    .form-submit-btn {
+      width: 100%;
+      padding: 17px;
+      background: var(--blue);
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+      margin-top: 6px;
+    }
+    .form-submit-btn:hover {
+      background: var(--blue-bright);
+      transform: translateY(-2px);
+    }
+
+    .form-success {
+      display: none;
+      text-align: center;
+      padding: 48px 20px;
+    }
+    .form-success.show { display: block; }
+    .form-success-icon {
+      font-size: 48px;
+      margin-bottom: 16px;
+    }
+    .form-success h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 42px;
+      color: var(--white);
+      margin-bottom: 12px;
+    }
+    .form-success p {
+      color: var(--white-muted);
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    /* =============================================
+       FINAL CTA
+    ============================================= */
+    .final-cta {
+      background: var(--blue);
+      padding: 80px 20px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .final-cta::before {
+      content: 'ONTIVISIONS';
+      position: absolute;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 220px;
+      color: rgba(0,0,0,0.12);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      white-space: nowrap;
+      pointer-events: none;
+      line-height: 1;
+    }
+    .final-cta-content {
+      position: relative;
+      z-index: 2;
+    }
+    .final-cta h2 {
+      font-size: clamp(52px, 9vw, 96px);
+      color: #fff;
+      margin-bottom: 20px;
+    }
+    .final-cta p {
+      font-size: 15px;
+      color: rgba(255,255,255,0.8);
+      margin-bottom: 32px;
+      max-width: 380px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.6;
+    }
+    .final-cta .btn {
+      background: #fff;
+      color: var(--blue);
+    }
+    .final-cta .btn:hover {
+      background: #e8f3ff;
+      transform: translateY(-2px);
+    }
+
+    /* =============================================
+       FOOTER
+    ============================================= */
+    footer {
+      background: #050505;
+      padding: 40px 20px 80px;
+      text-align: center;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    @media (min-width: 768px) {
+      footer { padding-bottom: 40px; }
+    }
+    .footer-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 32px;
+      color: var(--white);
+      letter-spacing: 0.08em;
+      margin-bottom: 20px;
+    }
+    .footer-logo span { color: var(--blue); }
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 28px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+    .footer-links a {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--white-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--blue); }
+    .footer-copy {
+      font-size: 11px;
+      color: rgba(240,240,240,0.25);
+      letter-spacing: 0.05em;
+    }
+
+    /* =============================================
+       SCROLL REVEAL BASE STATES
+    ============================================= */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+    .reveal-delay-5 { transition-delay: 0.5s; }
+
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="navbar">
+    <!-- LOGO PLACEHOLDER — NAV
+         To add your logo: replace the <span> below with:
+         <img src="your-logo.png" alt="Ontivisions" style="height:36px; width:auto;" />
+         Recommended: PNG with transparent background, ~120x36px or similar
+    -->
+    <a href="#" class="nav-logo">
+      <span class="logo-img-slot" style="display:inline-flex; align-items:center; gap:10px;">
+        <span class="logo-placeholder-box" style="
+          display:inline-block;
+          width:32px; height:32px;
+          border:1.5px dashed rgba(26,140,255,0.5);
+          border-radius:4px;
+          background:rgba(26,140,255,0.06);
+          vertical-align:middle;
+          font-size:8px;
+          font-family:'Inter',sans-serif;
+          font-weight:700;
+          letter-spacing:0.05em;
+          color:rgba(26,140,255,0.5);
+          display:inline-flex;
+          align-items:center;
+          justify-content:center;
+          text-transform:uppercase;
+        ">LOGO</span>
+        ONTI<span>VISIONS</span>
+      </span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#packages">Packages</a></li>
+      <li><a href="#addons">Add-ons</a></li>
+      <li><a href="#booking">Book Now</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="top">
+    <div class="hero-glow"></div>
+    <div class="hero-photo"></div>
+    <div class="hero-slash"></div>
+
+    <div class="hero-content">
+      <!-- LOGO PLACEHOLDER — HERO
+           To add your logo: replace the div below with:
+           <img src="your-logo.png" alt="Ontivisions" style="height:64px; width:auto; margin-bottom:28px;" />
+           Recommended: white or light PNG, transparent background, ~200x64px
+      -->
+      <div class="hero-logo-slot" style="
+        margin-bottom: 28px;
+        display: flex;
+        justify-content: center;
+      ">
+        <div style="
+          width:180px; height:60px;
+          border:1.5px dashed rgba(26,140,255,0.35);
+          border-radius:6px;
+          background:rgba(26,140,255,0.04);
+          display:flex;
+          align-items:center;
+          justify-content:center;
+          font-family:'Inter',sans-serif;
+          font-size:10px;
+          font-weight:700;
+          letter-spacing:0.2em;
+          text-transform:uppercase;
+          color:rgba(26,140,255,0.4);
+        ">YOUR LOGO HERE</div>
+      </div>
+      <span class="eyebrow">Arizona Sports Photography</span>
+      <h1>
+        Premium Sports<br>
+        <span class="blue">Photography</span><br>
+        <span style="font-size: 0.45em; font-family: 'Inter', sans-serif; font-weight: 800; letter-spacing: 0.1em; color: rgba(240,240,240,0.6);">Built For Athletes.</span>
+      </h1>
+      <p class="hero-sub">
+        Game day coverage, media days, private athlete sessions, and team content by Ontivisions.
+      </p>
+      <div class="hero-btns">
+        <a href="#packages" class="btn btn-primary">View Packages</a>
+        <a href="#booking" class="btn btn-outline">Book Coverage</a>
+      </div>
+    </div>
+
+    <div class="hero-bar"></div>
+
+    <a href="#intro" class="scroll-hint">
+      <span>Scroll</span>
+      <svg width="18" height="10" viewBox="0 0 18 10" fill="none">
+        <path d="M1 1L9 9L17 1" stroke="#1a8cff" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </a>
+  </section>
+
+  <!-- INTRO -->
+  <section class="intro" id="intro">
+    <span class="eyebrow reveal">Who We Are</span>
+    <p class="reveal reveal-delay-1">
+      <strong>Ontivisions creates professional, high-energy sports photography</strong> for athletes, teams, coaches, and parents across Arizona. From game day action to media days and private athlete sessions — we deliver gallery-quality images that showcase your best moments. Football, basketball, 7v7, softball, and more.
+    </p>
+    <div class="stat-strip">
+      <div class="stat reveal reveal-delay-2">
+        <div class="stat-num">48H</div>
+        <div class="stat-label">Turnaround</div>
+      </div>
+      <div class="stat reveal reveal-delay-3">
+        <div class="stat-num">HD</div>
+        <div class="stat-label">Digital Delivery</div>
+      </div>
+      <div class="stat reveal reveal-delay-4">
+        <div class="stat-num">5+</div>
+        <div class="stat-label">Sports Covered</div>
+      </div>
+      <div class="stat reveal reveal-delay-5">
+        <div class="stat-num">AZ</div>
+        <div class="stat-label">Based & Ready</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PACKAGES -->
+  <section class="packages" id="packages">
+    <div class="section-header reveal">
+      <span class="eyebrow">Coverage Options</span>
+      <h2>Packages</h2>
+      <p>Choose the level of coverage that fits your program, team, or athlete.</p>
+    </div>
+
+    <div class="packages-grid container">
+
+      <!-- Package 1 -->
+      <div class="pkg-card reveal reveal-delay-1">
+        <div class="pkg-photo">
+          <div class="pkg-photo-bar"></div>
+        </div>
+        <div class="pkg-body">
+          <div class="pkg-badge">Individual</div>
+          <div class="pkg-name">Private Athlete Session</div>
+          <ul class="pkg-features">
+            <li>Best for individual athletes</li>
+            <li>Posed and action-style shots</li>
+            <li>Full game coverage included</li>
+            <li>Edited digital gallery delivered</li>
+          </ul>
+          <div class="pkg-price">$_<span>Starting at</span></div>
+        </div>
+      </div>
+
+      <!-- Package 2 -->
+      <div class="pkg-card featured reveal reveal-delay-2">
+        <div class="pkg-photo">
+          <div class="pkg-photo-bar"></div>
+        </div>
+        <div class="pkg-body">
+          <div class="pkg-badge">Live Action</div>
+          <div class="pkg-name">Game Day Coverage</div>
+          <ul class="pkg-features">
+            <li>Best for live games</li>
+            <li>Action shots, sideline moments &amp; celebrations</li>
+            <li>Key plays captured in full</li>
+            <li>Edited gallery + fast turnaround</li>
+          </ul>
+          <div class="pkg-price">$_<span>Starting at</span></div>
+        </div>
+      </div>
+
+      <!-- Package 3 -->
+      <div class="pkg-card reveal reveal-delay-3">
+        <div class="pkg-photo">
+          <div class="pkg-photo-bar"></div>
+        </div>
+        <div class="pkg-body">
+          <div class="pkg-badge">Full Team</div>
+          <div class="pkg-name">Team Media Day</div>
+          <ul class="pkg-features">
+            <li>Best for full teams &amp; programs</li>
+            <li>Individual portraits + group team photos</li>
+            <li>Creative graphics &amp; social media content</li>
+            <li>Shareable, ready-to-post files included</li>
+          </ul>
+          <div class="pkg-price">$_<span>Starting at</span></div>
+        </div>
+      </div>
+
+      <!-- Package 4 -->
+      <div class="pkg-card reveal reveal-delay-4">
+        <div class="pkg-photo">
+          <div class="pkg-photo-bar"></div>
+        </div>
+        <div class="pkg-body">
+          <div class="pkg-badge">Season Package</div>
+          <div class="pkg-name">Full Program Coverage</div>
+          <ul class="pkg-features">
+            <li>Best for programs wanting consistent coverage</li>
+            <li>Multiple games and sessions included</li>
+            <li>Priority booking all season long</li>
+            <li>Custom content plan built for your team</li>
+          </ul>
+          <div class="pkg-price" style="font-size: 30px;">Custom<span>Quote</span></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ADD-ONS -->
+  <section class="addons" id="addons">
+    <div class="section-header reveal">
+      <span class="eyebrow">Level Up</span>
+      <h2>Add-Ons</h2>
+      <p>Customize your package with extras that get you more mileage from every shoot.</p>
+    </div>
+
+    <div class="addons-grid container">
+      <div class="addon-chip reveal reveal-delay-1">
+        <div class="addon-chip-icon">⚡</div>
+        <div class="addon-chip-name">Rush Delivery</div>
+        <div class="addon-chip-desc">Same-day or next-day gallery turnaround for time-sensitive events.</div>
+      </div>
+      <div class="addon-chip reveal reveal-delay-2">
+        <div class="addon-chip-icon">📱</div>
+        <div class="addon-chip-name">Social Media Graphics</div>
+        <div class="addon-chip-desc">Branded graphics and overlays formatted for posts and stories.</div>
+      </div>
+      <div class="addon-chip reveal reveal-delay-3">
+        <div class="addon-chip-icon">🖼️</div>
+        <div class="addon-chip-name">Full Team Gallery</div>
+        <div class="addon-chip-desc">Private online gallery shared with the entire team and parents.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BOOKING FORM -->
+  <section class="booking" id="booking">
+    <div class="section-header reveal">
+      <span class="eyebrow">Get Covered</span>
+      <h2>Book Your Session</h2>
+      <p>Fill out the form and we'll reach out within 24 hours to confirm your date.</p>
+    </div>
+
+    <div class="form-wrapper reveal">
+
+      <!-- SUCCESS STATE -->
+      <div class="form-success" id="formSuccess">
+        <div class="form-success-icon">✅</div>
+        <h3>Request Sent!</h3>
+        <p>We received your booking request and will reach out within 24 hours to lock in your coverage. Check your email for a confirmation.</p>
+      </div>
+
+      <!--
+        MONDAY.COM INTEGRATION — Board: "Ethan Website Leads" (ID: 18418478088)
+        This form posts directly to Monday.com via a Cloudflare Worker proxy.
+
+        HOW TO ACTIVATE:
+        1. Go to your Cloudflare Worker (frosty-union-afc6.kris-384.workers.dev)
+        2. Copy the existing SOKO Designs worker code and deploy a NEW worker for Ontivisions
+        3. In the new worker, set:
+              MONDAY_BOARD_ID = "18418478088"
+              MONDAY_GROUP_ID = "topics"   (this is the "New Leads" group)
+        4. Paste your new worker URL into the WORKER_URL constant below
+        5. Make sure your Monday.com API token is set in the worker's environment variables
+
+        Column ID reference (do not change these — they match the live board):
+          name                  = item name (contact's name)
+          phoneyccxxz9x         = Phone
+          email4534pr3a         = Email
+          short_textmnssydcm    = Location / City
+          single_selectwhmwcjv  = Sport (status column)
+          long_texttcnuinic     = What Are You Looking For?
+          single_selecttdksrhl  = Package (status column)
+          color_mm42b37j        = Status (set to "Follow up needed" on new leads)
+          date_mm42tg46         = Event / Session Date
+          text_mm4ef6ny         = Athlete / Team Name
+          dropdown_mm4ea842     = Budget Range (dropdown)
+      -->
+      <form class="booking-form" id="bookingForm" novalidate>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="f-name">Your Name *</label>
+            <input type="text" id="f-name" placeholder="First Last" required />
+          </div>
+          <div class="form-group">
+            <label for="f-email">Email Address *</label>
+            <input type="email" id="f-email" placeholder="you@email.com" required />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="f-phone">Phone Number</label>
+            <input type="tel" id="f-phone" placeholder="(480) 000-0000" />
+          </div>
+          <div class="form-group">
+            <label for="f-athlete">Athlete / Team Name *</label>
+            <input type="text" id="f-athlete" placeholder="Name or team" required />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="f-sport">Sport *</label>
+            <select id="f-sport" required>
+              <option value="" disabled selected>Select a sport</option>
+              <option value="Football">Football</option>
+              <option value="Basketball">Basketball</option>
+              <option value="Baseball / Softball">Baseball / Softball</option>
+              <option value="Track &amp; Field">Track &amp; Field</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="f-package">Package *</label>
+            <select id="f-package" required>
+              <option value="" disabled selected>Select a package</option>
+              <option value="Basic">Private Athlete Session</option>
+              <option value="Standard">Game Day Coverage</option>
+              <option value="Premium">Team Media Day</option>
+              <option value="Elite">Full Program Coverage</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="f-date">Event / Session Date</label>
+            <input type="date" id="f-date" />
+          </div>
+          <div class="form-group">
+            <label for="f-location">Location / City</label>
+            <input type="text" id="f-location" placeholder="City or venue" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="f-budget">Budget Range</label>
+          <select id="f-budget">
+            <option value="" disabled selected>Select a range</option>
+            <option value="Under $100">Under $100</option>
+            <option value="$100 - $250">$100 – $250</option>
+            <option value="$250 - $500">$250 – $500</option>
+            <option value="$500 - $1,000">$500 – $1,000</option>
+            <option value="$1,000+">$1,000+</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="f-notes">What Are You Looking For?</label>
+          <textarea id="f-notes" placeholder="Tell us about your event, specific shots you want, add-ons you're interested in, etc."></textarea>
+        </div>
+
+        <div id="formError" style="display:none; color:#ff6b6b; font-size:13px; margin-bottom:12px; font-weight:600;"></div>
+
+        <button type="submit" class="form-submit-btn" id="submitBtn">Send Booking Request →</button>
+
+      </form>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="final-cta">
+    <div class="final-cta-content">
+      <h2>Ready to Lock In Your Coverage?</h2>
+      <p>Premium game day and athlete photography available now. Spots fill fast on weekends.</p>
+      <a href="#booking" class="btn">Book Ontivisions</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <!-- LOGO PLACEHOLDER — FOOTER
+         To add your logo: replace the div below with:
+         <img src="your-logo.png" alt="Ontivisions" style="height:52px; width:auto; margin-bottom:20px;" />
+    -->
+    <div style="display:flex; justify-content:center; margin-bottom:16px;">
+      <div style="
+        width:140px; height:48px;
+        border:1.5px dashed rgba(26,140,255,0.3);
+        border-radius:5px;
+        background:rgba(26,140,255,0.04);
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        font-family:'Inter',sans-serif;
+        font-size:9px;
+        font-weight:700;
+        letter-spacing:0.2em;
+        text-transform:uppercase;
+        color:rgba(26,140,255,0.35);
+      ">YOUR LOGO</div>
+    </div>
+    <div class="footer-logo">ONTI<span>VISIONS</span></div>
+    <div class="footer-links">
+      <a href="https://instagram.com/ontivisions" target="_blank">@ontivisions</a>
+      <a href="tel:4804165306">(480) 416-5306</a>
+      <a href="mailto:ontivisions@gmail.com">ontivisions@gmail.com</a>
+      <a href="#packages">Packages</a>
+      <a href="#booking">Book Now</a>
+    </div>
+    <p class="footer-copy">© <span id="year"></span> Ontivisions. All rights reserved. Arizona Sports Photography.</p>
+  </footer>
+
+  <!-- STICKY MOBILE CTA -->
+  <div class="sticky-cta" id="stickyCta">
+    <a href="#packages" class="btn btn-outline">Packages</a>
+    <a href="#booking" class="btn btn-primary">Book Now</a>
+  </div>
+
+  <!-- JAVASCRIPT -->
+  <script>
+    // ─── Year ───
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // ─── Navbar scroll ───
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    // ─── Scroll reveal ───
+    const revealEls = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    revealEls.forEach(el => revealObserver.observe(el));
+
+    // ─────────────────────────────────────────────────────
+    // MONDAY.COM FORM SUBMISSION
+    // Board: "Ethan Website Leads" — ID: 18418478088
+    // Group: "New Leads" — ID: topics
+    //
+    // SETUP: Paste your Cloudflare Worker URL below.
+    // Create a dedicated worker for Ontivisions (copy the
+    // SOKO Designs worker pattern) with:
+    //   MONDAY_BOARD_ID = "18418478088"
+    //   MONDAY_GROUP_ID = "topics"
+    // Then paste the worker's URL here:
+    const WORKER_URL = 'YOUR_CLOUDFLARE_WORKER_URL_HERE';
+    // ─────────────────────────────────────────────────────
+
+    const form    = document.getElementById('bookingForm');
+    const success = document.getElementById('formSuccess');
+    const errBox  = document.getElementById('formError');
+    const submitBtn = document.getElementById('submitBtn');
+
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      errBox.style.display = 'none';
+
+      // Validate required fields
+      const requiredIds = ['f-name', 'f-email', 'f-sport', 'f-package'];
+      let valid = true;
+      requiredIds.forEach(id => {
+        const el = document.getElementById(id);
+        if (!el.value.trim()) {
+          valid = false;
+          el.style.borderColor = '#ff4d4d';
+          el.addEventListener('input', () => el.style.borderColor = '', { once: true });
+        }
+      });
+      if (!valid) {
+        errBox.textContent = 'Please fill in all required fields.';
+        errBox.style.display = 'block';
+        return;
+      }
+
+      // Read values
+      const name     = document.getElementById('f-name').value.trim();
+      const email    = document.getElementById('f-email').value.trim();
+      const phone    = document.getElementById('f-phone').value.trim();
+      const athlete  = document.getElementById('f-athlete').value.trim();
+      const sport    = document.getElementById('f-sport').value;
+      const pkg      = document.getElementById('f-package').value;
+      const date     = document.getElementById('f-date').value;       // YYYY-MM-DD
+      const location = document.getElementById('f-location').value.trim();
+      const budget   = document.getElementById('f-budget').value;
+      const notes    = document.getElementById('f-notes').value.trim();
+
+      // Build notes string (budget + notes combined into long_text)
+      const notesFormatted = [
+        budget   ? `Budget: ${budget}`        : '',
+        athlete  ? `Athlete/Team: ${athlete}` : '',
+        notes    || ''
+      ].filter(Boolean).join('\n');
+
+      // Build Monday.com column values
+      // All column IDs match board 18418478088 exactly
+      const columnValues = {
+        "phoneyccxxz9x":      phone    ? { phone: phone, countryShortName: "US" } : undefined,
+        "email4534pr3a":      email    ? { email: email, text: email }             : undefined,
+        "short_textmnssydcm": location || undefined,
+        "single_selectwhmwcjv": sport  ? { label: sport }                         : undefined,
+        "single_selecttdksrhl": pkg    ? { label: pkg }                           : undefined,
+        "color_mm42b37j":     { label: "Follow up needed" },
+        "date_mm42tg46":      date     ? { date: date }                           : undefined,
+        "text_mm4ef6ny":      athlete  || undefined,
+        "dropdown_mm4ea842":  budget   ? { labels: [budget] }                     : undefined,
+        "long_texttcnuinic":  notesFormatted || undefined
+      };
+
+      // Remove undefined keys
+      Object.keys(columnValues).forEach(k => {
+        if (columnValues[k] === undefined) delete columnValues[k];
+      });
+
+      // Disable button while submitting
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending…';
+
+      try {
+        const res = await fetch(WORKER_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            boardId:      '18418478088',
+            groupId:      'topics',
+            itemName:     name,
+            columnValues: columnValues
+          })
+        });
+
+        if (!res.ok) throw new Error(`Server error: ${res.status}`);
+
+        // Success
+        form.style.display = 'none';
+        success.classList.add('show');
+        success.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+      } catch (err) {
+        console.error('Monday.com submission error:', err);
+        errBox.textContent = 'Something went wrong. Please try again or email us directly.';
+        errBox.style.display = 'block';
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Send Booking Request →';
+      }
+    });
+
+    // ─── Hide sticky CTA near the booking form ───
+    const stickyCta = document.getElementById('stickyCta');
+    const bookingSection = document.getElementById('booking');
+    const stickyObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        stickyCta.style.opacity = entry.isIntersecting ? '0' : '1';
+        stickyCta.style.pointerEvents = entry.isIntersecting ? 'none' : 'auto';
+      });
+    }, { threshold: 0.1 });
+    stickyObserver.observe(bookingSection);
+  </script>
+
+</body>
+</html>
