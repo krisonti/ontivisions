@@ -1,1326 +1,994 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ontivisions — Premium Sports Photography</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
   <style>
-    /* =============================================
-       RESET & BASE
-    ============================================= */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; font-size: 16px; }
-    body {
-      font-family: 'Inter', sans-serif;
-      background: #0a0a0a;
-      color: #f0f0f0;
-      overflow-x: hidden;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    /* =============================================
-       CSS VARIABLES
-    ============================================= */
+    body { font-family: 'Inter', sans-serif; background: #0a0a0a; color: #f0f0f0; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
     :root {
-      --black:       #0a0a0a;
-      --black-soft:  #111111;
-      --gray-dark:   #161616;
-      --gray-mid:    #1e1e1e;
-      --gray-light:  #2a2a2a;
-      --white:       #f0f0f0;
-      --white-muted: rgba(240, 240, 240, 0.55);
-      --blue:        #1a8cff;
-      --blue-bright: #3da5ff;
-      --blue-glow:   rgba(26, 140, 255, 0.15);
-      --silver:      #c0c8d4;
-      --accent-line: rgba(26, 140, 255, 0.3);
-    }
-
-    /* =============================================
-       TYPOGRAPHY
-    ============================================= */
-    h1, h2, h3, .display {
-      font-family: 'Bebas Neue', sans-serif;
-      letter-spacing: 0.02em;
-      line-height: 0.95;
-    }
-
-    /* =============================================
-       UTILITY
-    ============================================= */
-    .container {
-      max-width: 960px;
-      margin: 0 auto;
-      padding: 0 20px;
-    }
-    .eyebrow {
-      font-family: 'Inter', sans-serif;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--blue);
-      display: block;
-      margin-bottom: 16px;
-    }
-    .btn {
-      display: inline-block;
-      font-family: 'Inter', sans-serif;
-      font-weight: 700;
-      font-size: 14px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      text-decoration: none;
-      padding: 14px 32px;
-      border-radius: 3px;
-      cursor: pointer;
-      border: none;
-      transition: all 0.2s ease;
-    }
-    .btn-primary {
-      background: var(--blue);
-      color: #fff;
-    }
-    .btn-primary:hover {
-      background: var(--blue-bright);
-      transform: translateY(-2px);
-    }
-    .btn-outline {
-      background: transparent;
-      color: var(--white);
-      border: 1.5px solid rgba(240,240,240,0.3);
-    }
-    .btn-outline:hover {
-      border-color: var(--blue);
-      color: var(--blue);
-      transform: translateY(-2px);
-    }
-
-    /* =============================================
-       STICKY MOBILE CTA
-    ============================================= */
-    .sticky-cta {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      z-index: 999;
-      padding: 12px 20px;
-      background: rgba(10,10,10,0.97);
-      border-top: 1px solid rgba(255,255,255,0.08);
-      display: flex;
-      gap: 10px;
-    }
-    .sticky-cta .btn {
-      flex: 1;
-      text-align: center;
-      font-size: 13px;
-      padding: 13px 16px;
-    }
-    @media (min-width: 768px) {
-      .sticky-cta { display: none; }
-    }
-
-    /* =============================================
-       NAV
-    ============================================= */
-    nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 100;
-      padding: 18px 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: transparent;
-      transition: background 0.3s ease;
-    }
-    nav.scrolled {
-      background: rgba(10,10,10,0.95);
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-      backdrop-filter: blur(12px);
-    }
-    .nav-logo {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 26px;
-      color: var(--white);
-      letter-spacing: 0.06em;
-      text-decoration: none;
-    }
-    .nav-logo span { color: var(--blue); }
-    .nav-links {
-      display: flex;
-      gap: 28px;
-      list-style: none;
-    }
-    .nav-links a {
-      font-family: 'Inter', sans-serif;
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--white-muted);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-    .nav-links a:hover { color: var(--blue); }
-    @media (max-width: 640px) {
-      .nav-links { display: none; }
-    }
-
-    /* =============================================
-       HERO
-    ============================================= */
-    .hero {
-      position: relative;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: var(--black);
-      overflow: hidden;
-      padding: 0 20px;
-    }
-
-    /* Diagonal grid texture */
-    .hero::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-image:
-        linear-gradient(rgba(26,140,255,0.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(26,140,255,0.04) 1px, transparent 1px);
-      background-size: 60px 60px;
-      pointer-events: none;
-    }
-
-    /* Blue glow burst */
-    .hero-glow {
-      position: absolute;
-      width: 700px;
-      height: 700px;
-      border-radius: 50%;
-      background: radial-gradient(ellipse, rgba(26,140,255,0.12) 0%, transparent 70%);
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -55%);
-      pointer-events: none;
-    }
-
-    /* Placeholder photo block */
-    .hero-photo {
-      position: absolute;
-      inset: 0;
-      opacity: 0.18;
-      background: linear-gradient(135deg, #1a2a3a 0%, #0a0a0a 60%);
-      pointer-events: none;
-    }
-    /* Replace .hero-photo background with: background: url('your-hero.jpg') center/cover; */
-
-    /* Diagonal slash accent */
-    .hero-slash {
-      position: absolute;
-      top: 0;
-      right: 0;
-      width: 40%;
-      height: 100%;
-      background: linear-gradient(165deg, rgba(26,140,255,0.06) 0%, transparent 50%);
-      clip-path: polygon(30% 0%, 100% 0%, 100% 100%, 0% 100%);
-      pointer-events: none;
-    }
-
-    .hero-content {
-      position: relative;
-      z-index: 2;
-      text-align: center;
-      max-width: 820px;
-      padding-top: 80px;
-    }
-
-    .hero h1 {
-      font-size: clamp(72px, 14vw, 130px);
-      color: var(--white);
-      line-height: 0.92;
-      margin-bottom: 24px;
-    }
-    .hero h1 .blue { color: var(--blue); }
-    .hero h1 .thin {
-      font-family: 'Inter', sans-serif;
-      font-weight: 800;
-      font-size: clamp(14px, 2.5vw, 22px);
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--white-muted);
-      display: block;
-      line-height: 1;
-      margin-bottom: 10px;
-    }
-
-    .hero-sub {
-      font-size: clamp(14px, 2.2vw, 17px);
-      color: var(--white-muted);
-      max-width: 540px;
-      margin: 0 auto 36px;
-      line-height: 1.65;
-    }
-
-    .hero-btns {
-      display: flex;
-      gap: 12px;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    /* Animated bar at bottom */
-    .hero-bar {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, transparent, var(--blue), var(--blue-bright), transparent);
-      animation: barSweep 3s ease-in-out infinite;
-    }
-    @keyframes barSweep {
-      0%, 100% { opacity: 0.4; transform: scaleX(0.6); }
-      50% { opacity: 1; transform: scaleX(1); }
-    }
-
-    .scroll-hint {
-      position: absolute;
-      bottom: 28px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 6px;
-      cursor: pointer;
-    }
-    .scroll-hint span {
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--white-muted);
-    }
-    .scroll-hint svg { animation: bounce 2.2s ease-in-out infinite; }
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0); opacity: 0.4; }
-      50% { transform: translateY(6px); opacity: 1; }
-    }
-
-    /* =============================================
-       INTRO STRIP
-    ============================================= */
-    .intro {
-      background: var(--gray-dark);
-      border-top: 1px solid rgba(255,255,255,0.06);
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-      padding: 56px 20px;
-      text-align: center;
-    }
-    .intro p {
-      max-width: 640px;
-      margin: 0 auto;
-      font-size: clamp(15px, 2.2vw, 18px);
-      line-height: 1.7;
-      color: var(--white-muted);
-    }
-    .intro p strong { color: var(--white); font-weight: 700; }
-
-    /* Stat strip */
-    .stat-strip {
-      display: flex;
-      justify-content: center;
-      gap: 48px;
-      margin-top: 40px;
-      flex-wrap: wrap;
-    }
-    .stat {
-      text-align: center;
-    }
-    .stat-num {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 48px;
-      color: var(--blue);
-      line-height: 1;
-    }
-    .stat-label {
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--white-muted);
-      margin-top: 4px;
-    }
-
-    /* =============================================
-       PACKAGES
-    ============================================= */
-    .packages {
-      background: var(--black);
-      padding: 80px 20px 100px;
-    }
-    .section-header {
-      text-align: center;
-      margin-bottom: 52px;
-    }
-    .section-header h2 {
-      font-size: clamp(52px, 9vw, 88px);
-      color: var(--white);
-      margin-bottom: 12px;
-    }
-    .section-header p {
-      color: var(--white-muted);
-      font-size: 15px;
-      max-width: 440px;
-      margin: 0 auto;
-    }
-
-    .packages-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 16px;
-      max-width: 900px;
-      margin: 0 auto;
-    }
-    @media (max-width: 600px) {
-      .packages-grid { grid-template-columns: 1fr; }
-    }
-
-    .pkg-card {
-      background: var(--gray-dark);
-      border: 1px solid rgba(255,255,255,0.07);
-      border-radius: 6px;
-      overflow: hidden;
-      transition: border-color 0.25s, transform 0.25s;
-      position: relative;
-    }
-    .pkg-card:hover {
-      border-color: var(--blue);
-      transform: translateY(-4px);
-    }
-    .pkg-card.featured {
-      border-color: var(--blue);
-      grid-column: span 1;
-    }
-    .pkg-card.featured::before {
-      content: 'MOST POPULAR';
-      position: absolute;
-      top: 0;
-      right: 0;
-      background: var(--blue);
-      color: #fff;
-      font-family: 'Inter', sans-serif;
-      font-size: 9px;
-      font-weight: 800;
-      letter-spacing: 0.18em;
-      padding: 5px 14px;
-      border-radius: 0 6px 0 6px;
-    }
-
-    /* Placeholder photo inside package card */
-    .pkg-photo {
-      width: 100%;
-      height: 140px;
-      background: linear-gradient(135deg, #1a2030 0%, #0d0d0d 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      overflow: hidden;
-    }
-    .pkg-photo::after {
-      content: 'PHOTO';
-      font-family: 'Inter', sans-serif;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.2em;
-      color: rgba(255,255,255,0.15);
-    }
-    /* Replace .pkg-photo background with: background: url('your-photo.jpg') center/cover no-repeat; */
-    .pkg-photo-bar {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 2px;
-      background: var(--blue);
-      opacity: 0;
-      transition: opacity 0.25s;
-    }
-    .pkg-card:hover .pkg-photo-bar { opacity: 1; }
-
-    .pkg-body {
-      padding: 24px 22px 28px;
-    }
-    .pkg-badge {
-      font-family: 'Inter', sans-serif;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--blue);
-      margin-bottom: 8px;
-    }
-    .pkg-name {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 34px;
-      color: var(--white);
-      line-height: 1;
-      margin-bottom: 14px;
-    }
-    .pkg-features {
-      list-style: none;
-      margin-bottom: 22px;
-    }
-    .pkg-features li {
-      font-size: 13px;
-      color: var(--white-muted);
-      padding: 6px 0;
-      border-bottom: 1px solid rgba(255,255,255,0.05);
-      display: flex;
-      align-items: flex-start;
-      gap: 8px;
-      line-height: 1.4;
-    }
-    .pkg-features li::before {
-      content: '';
-      display: inline-block;
-      width: 5px;
-      height: 5px;
-      border-radius: 50%;
-      background: var(--blue);
-      flex-shrink: 0;
-      margin-top: 5px;
-    }
-    .pkg-price {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 42px;
-      color: var(--white);
-      line-height: 1;
-    }
-    .pkg-price span {
-      font-family: 'Inter', sans-serif;
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--white-muted);
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      margin-left: 6px;
-      vertical-align: middle;
-    }
-
-    /* =============================================
-       ADD-ONS
-    ============================================= */
-    .addons {
-      background: var(--gray-dark);
-      padding: 72px 20px;
-      border-top: 1px solid rgba(255,255,255,0.06);
-    }
-    .addons-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      max-width: 860px;
-      margin: 0 auto;
-    }
-    @media (max-width: 700px) {
-      .addons-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-    @media (max-width: 400px) {
-      .addons-grid { grid-template-columns: 1fr; }
-    }
-    .addon-chip {
-      background: var(--gray-mid);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 4px;
-      padding: 18px 16px;
-      transition: border-color 0.2s, background 0.2s;
-    }
-    .addon-chip:hover {
-      border-color: var(--blue);
-      background: rgba(26,140,255,0.05);
-    }
-    .addon-chip-icon {
-      font-size: 22px;
-      margin-bottom: 10px;
-    }
-    .addon-chip-name {
-      font-family: 'Inter', sans-serif;
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--white);
-      margin-bottom: 4px;
-    }
-    .addon-chip-desc {
-      font-size: 11px;
-      color: var(--white-muted);
-      line-height: 1.45;
-    }
-
-    /* =============================================
-       BOOKING FORM
-    ============================================= */
-    .booking {
-      background: var(--black);
-      padding: 80px 20px 120px;
-      border-top: 1px solid rgba(255,255,255,0.06);
-    }
-    .form-wrapper {
-      background: var(--gray-dark);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 8px;
-      padding: 40px 32px;
-      max-width: 680px;
-      margin: 0 auto;
-    }
-    @media (max-width: 480px) {
-      .form-wrapper { padding: 28px 20px; }
-    }
-
-    /* 
-      CONNECT FORMSPREE:
-      1. Go to formspree.io, create a free account
-      2. Create a new form, copy your endpoint URL
-      3. Replace action="#" below with your endpoint: action="https://formspree.io/f/YOUR_ID"
-      4. Remove the JS preventDefault and success-message logic if you want full redirect
-      
-      CONNECT GOOGLE FORMS:
-      1. Create a Google Form, click the three dots → Get pre-filled link
-      2. Map field names to the hidden input names in your Google Form
-      3. Change method="POST" and action to your Google Form action URL
-      
-      CONNECT EMAIL (Netlify Forms):
-      1. Add netlify to the <form> tag if deploying on Netlify: <form netlify>
-      2. Add a hidden input: <input type="hidden" name="form-name" value="booking">
-    */
-    .booking-form {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-    }
-
-    .form-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-    }
-    @media (max-width: 540px) {
-      .form-row { grid-template-columns: 1fr; gap: 0; }
-    }
-
-    .form-group {
-      display: flex;
-      flex-direction: column;
-      margin-bottom: 14px;
-    }
-    .form-group label {
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--white-muted);
-      margin-bottom: 7px;
-    }
-    .form-group input,
-    .form-group select,
-    .form-group textarea {
-      background: var(--gray-mid);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 4px;
-      padding: 13px 14px;
-      font-family: 'Inter', sans-serif;
-      font-size: 14px;
-      color: var(--white);
-      transition: border-color 0.2s;
-      outline: none;
-      -webkit-appearance: none;
-      appearance: none;
-      width: 100%;
-    }
-    .form-group input::placeholder,
-    .form-group textarea::placeholder {
-      color: rgba(240,240,240,0.25);
-    }
-    .form-group input:focus,
-    .form-group select:focus,
-    .form-group textarea:focus {
-      border-color: var(--blue);
-    }
-    .form-group select {
-      cursor: pointer;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23888' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: right 14px center;
-      padding-right: 36px;
-    }
-    .form-group select option { background: #1e1e1e; color: #f0f0f0; }
-    .form-group textarea {
-      resize: vertical;
-      min-height: 100px;
-      line-height: 1.5;
-    }
-
-    .form-submit-btn {
-      width: 100%;
-      padding: 17px;
-      background: var(--blue);
-      color: #fff;
-      border: none;
-      border-radius: 4px;
-      font-family: 'Inter', sans-serif;
-      font-size: 14px;
-      font-weight: 800;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      cursor: pointer;
-      transition: background 0.2s, transform 0.15s;
-      margin-top: 6px;
-    }
-    .form-submit-btn:hover {
-      background: var(--blue-bright);
-      transform: translateY(-2px);
-    }
-
-    .form-success {
-      display: none;
-      text-align: center;
-      padding: 48px 20px;
-    }
-    .form-success.show { display: block; }
-    .form-success-icon {
-      font-size: 48px;
-      margin-bottom: 16px;
-    }
-    .form-success h3 {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 42px;
-      color: var(--white);
-      margin-bottom: 12px;
-    }
-    .form-success p {
-      color: var(--white-muted);
-      font-size: 15px;
-      line-height: 1.6;
-    }
-
-    /* =============================================
-       FINAL CTA
-    ============================================= */
-    .final-cta {
-      background: var(--blue);
-      padding: 80px 20px;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-    .final-cta::before {
-      content: 'ONTIVISIONS';
-      position: absolute;
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 220px;
-      color: rgba(0,0,0,0.12);
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      white-space: nowrap;
-      pointer-events: none;
-      line-height: 1;
-    }
-    .final-cta-content {
-      position: relative;
-      z-index: 2;
-    }
-    .final-cta h2 {
-      font-size: clamp(52px, 9vw, 96px);
-      color: #fff;
-      margin-bottom: 20px;
-    }
-    .final-cta p {
-      font-size: 15px;
-      color: rgba(255,255,255,0.8);
-      margin-bottom: 32px;
-      max-width: 380px;
-      margin-left: auto;
-      margin-right: auto;
-      line-height: 1.6;
-    }
-    .final-cta .btn {
-      background: #fff;
-      color: var(--blue);
-    }
-    .final-cta .btn:hover {
-      background: #e8f3ff;
-      transform: translateY(-2px);
-    }
-
-    /* =============================================
-       FOOTER
-    ============================================= */
-    footer {
-      background: #050505;
-      padding: 40px 20px 80px;
-      text-align: center;
-      border-top: 1px solid rgba(255,255,255,0.06);
-    }
-    @media (min-width: 768px) {
-      footer { padding-bottom: 40px; }
-    }
-    .footer-logo {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 32px;
-      color: var(--white);
-      letter-spacing: 0.08em;
-      margin-bottom: 20px;
-    }
-    .footer-logo span { color: var(--blue); }
-    .footer-links {
-      display: flex;
-      justify-content: center;
-      gap: 28px;
-      flex-wrap: wrap;
-      margin-bottom: 20px;
-    }
-    .footer-links a {
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--white-muted);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-    .footer-links a:hover { color: var(--blue); }
-    .footer-copy {
-      font-size: 11px;
-      color: rgba(240,240,240,0.25);
-      letter-spacing: 0.05em;
-    }
-
-    /* =============================================
-       SCROLL REVEAL BASE STATES
-    ============================================= */
-    .reveal {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
-    }
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    .reveal-delay-1 { transition-delay: 0.1s; }
-    .reveal-delay-2 { transition-delay: 0.2s; }
-    .reveal-delay-3 { transition-delay: 0.3s; }
-    .reveal-delay-4 { transition-delay: 0.4s; }
+      --black: #0a0a0a; --gray-dark: #161616; --gray-mid: #1e1e1e;
+      --white: #f0f0f0; --white-muted: rgba(240,240,240,0.55);
+      --blue: #1a8cff; --blue-bright: #3da5ff;
+    }
+    h1, h2, h3 { font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.02em; line-height: 0.95; }
+    .container { max-width: 960px; margin: 0 auto; padding: 0 20px; }
+    .eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--blue); display: block; margin-bottom: 16px; }
+    .btn { display: inline-block; font-family: 'Inter', sans-serif; font-weight: 700; font-size: 14px; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; padding: 14px 32px; border-radius: 3px; cursor: pointer; border: none; transition: all 0.2s; }
+    .btn-primary { background: var(--blue); color: #fff; }
+    .btn-primary:hover { background: var(--blue-bright); transform: translateY(-2px); }
+    .btn-outline { background: transparent; color: var(--white); border: 1.5px solid rgba(240,240,240,0.3); }
+    .btn-outline:hover { border-color: var(--blue); color: var(--blue); transform: translateY(-2px); }
+    .section-header { text-align: center; margin-bottom: 52px; }
+    .section-header h2 { font-size: clamp(52px, 9vw, 88px); color: var(--white); margin-bottom: 12px; }
+    .section-header p { color: var(--white-muted); font-size: 15px; max-width: 440px; margin: 0 auto; }
+    .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; } .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; } .reveal-delay-4 { transition-delay: 0.4s; }
     .reveal-delay-5 { transition-delay: 0.5s; }
 
+    /* STICKY MOBILE CTA */
+    .sticky-cta { position: fixed; bottom: 0; left: 0; right: 0; z-index: 200; padding: 12px 20px; background: rgba(10,10,10,0.97); border-top: 1px solid rgba(255,255,255,0.08); display: flex; gap: 10px; }
+    .sticky-cta .btn { flex: 1; text-align: center; font-size: 13px; padding: 13px 16px; }
+    @media (min-width: 768px) { .sticky-cta { display: none; } }
+
+    /* NAV */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 18px 20px; display: flex; align-items: center; justify-content: space-between; background: transparent; transition: background 0.3s; }
+    nav.scrolled { background: rgba(10,10,10,0.95); border-bottom: 1px solid rgba(255,255,255,0.06); backdrop-filter: blur(12px); }
+    .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 26px; color: var(--white); letter-spacing: 0.06em; text-decoration: none; }
+    .nav-logo span { color: var(--blue); }
+    .nav-links { display: flex; gap: 28px; list-style: none; }
+    .nav-links a { font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--white-muted); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--blue); }
+    @media (max-width: 640px) { .nav-links { display: none; } }
+
+    /* HERO */
+    .hero { position: relative; min-height: 100vh; display: flex; align-items: center; justify-content: center; background: var(--black); overflow: hidden; padding: 0 20px; }
+    .hero::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(26,140,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(26,140,255,0.04) 1px, transparent 1px); background-size: 60px 60px; pointer-events: none; }
+    .hero-glow { position: absolute; width: 700px; height: 700px; border-radius: 50%; background: radial-gradient(ellipse, rgba(26,140,255,0.12) 0%, transparent 70%); top: 50%; left: 50%; transform: translate(-50%,-55%); pointer-events: none; }
+    .hero-photo { position: absolute; inset: 0; opacity: 0.18; background: linear-gradient(135deg, #1a2a3a 0%, #0a0a0a 60%); pointer-events: none; }
+    .hero-slash { position: absolute; top: 0; right: 0; width: 40%; height: 100%; background: linear-gradient(165deg, rgba(26,140,255,0.06) 0%, transparent 50%); clip-path: polygon(30% 0%, 100% 0%, 100% 100%, 0% 100%); pointer-events: none; }
+    .hero-content { position: relative; z-index: 2; text-align: center; max-width: 820px; padding-top: 80px; }
+    .hero h1 { font-size: clamp(72px, 14vw, 130px); color: var(--white); line-height: 0.92; margin-bottom: 24px; }
+    .hero h1 .blue { color: var(--blue); }
+    .hero-sub { font-size: clamp(14px, 2.2vw, 17px); color: var(--white-muted); max-width: 540px; margin: 0 auto 36px; line-height: 1.65; }
+    .hero-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .hero-bar { position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, transparent, var(--blue), var(--blue-bright), transparent); animation: barSweep 3s ease-in-out infinite; }
+    @keyframes barSweep { 0%,100%{opacity:.4;transform:scaleX(.6)} 50%{opacity:1;transform:scaleX(1)} }
+
+    /* PORTFOLIO */
+    .portfolio { background: #0d0d0d; padding: 88px 20px 100px; border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .portfolio-filters { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; margin-bottom: 40px; }
+    .pf-btn { font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 9px 20px; border-radius: 3px; border: 1.5px solid rgba(255,255,255,0.15); background: transparent; color: var(--white-muted); cursor: pointer; transition: all 0.2s; }
+    .pf-btn:hover, .pf-btn.active { border-color: var(--blue); color: var(--blue); background: rgba(26,140,255,0.08); }
+    .portfolio-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; max-width: 960px; margin: 0 auto; }
+    @media (max-width: 640px) { .portfolio-grid { grid-template-columns: repeat(2,1fr); } }
+    .portfolio-more { display: none; grid-template-columns: repeat(3, 1fr); gap: 10px; max-width: 960px; margin: 10px auto 0; }
+    @media (max-width: 640px) { .portfolio-more { grid-template-columns: repeat(2,1fr); } }
+    .portfolio-more.open { display: grid; }
+    .pf-item { position: relative; aspect-ratio: 4/3; border-radius: 5px; overflow: hidden; cursor: pointer; border: 1px solid rgba(255,255,255,0.07); transition: transform 0.25s, border-color 0.25s; background: #161616; }
+    .pf-item.big { grid-column: span 2; aspect-ratio: 16/9; }
+    .pf-item:hover { transform: scale(1.015); border-color: var(--blue); z-index: 2; }
+    .pf-item:hover .pf-overlay { opacity: 1; }
+    .pf-item::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: var(--blue); transform: scaleX(0); transition: transform 0.25s; }
+    .pf-item:hover::after { transform: scaleX(1); }
+    .pf-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .pf-placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 10px; }
+    .pf-placeholder-icon { font-size: 30px; opacity: 0.25; }
+    .pf-placeholder-label { font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.2); }
+    .sport-football { background: linear-gradient(135deg,#0d1a2a,#080f18); }
+    .sport-basketball { background: linear-gradient(135deg,#1c0e07,#110806); }
+    .sport-7v7 { background: linear-gradient(135deg,#0a1a0a,#071007); }
+    .sport-softball { background: linear-gradient(135deg,#1a180a,#100f07); }
+    .pf-overlay { position: absolute; inset: 0; background: rgba(5,5,5,0.72); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; opacity: 0; transition: opacity 0.25s; }
+    .pf-overlay-sport { font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--blue); }
+    .pf-overlay-cta { font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--white); }
+    .portfolio-actions { text-align: center; margin-top: 40px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .pf-expand-btn { font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 13px 32px; border-radius: 3px; border: 1.5px solid rgba(240,240,240,0.25); background: transparent; color: var(--white); cursor: pointer; transition: all 0.2s; }
+    .pf-expand-btn:hover { border-color: var(--blue); color: var(--blue); }
+    .pf-empty { grid-column: 1/-1; text-align: center; padding: 60px 20px; color: var(--white-muted); font-size: 14px; line-height: 1.6; }
+    .pf-empty strong { display: block; font-family: 'Bebas Neue', sans-serif; font-size: 32px; color: rgba(240,240,240,0.2); margin-bottom: 8px; letter-spacing: 0.05em; }
+
+    /* LIGHTBOX */
+    .lightbox { display: none; position: fixed; inset: 0; background: rgba(5,5,5,0.97); z-index: 9999; align-items: center; justify-content: center; flex-direction: column; gap: 20px; }
+    .lightbox.open { display: flex; }
+    .lb-img-wrap { width: min(860px,90vw); max-height: 80vh; border-radius: 6px; overflow: hidden; border: 1px solid rgba(26,140,255,0.25); background: #111; display: flex; align-items: center; justify-content: center; }
+    .lb-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
+    .lb-placeholder { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+    .lb-placeholder-icon { font-size: 52px; opacity: 0.25; }
+    .lb-sport { font-size: 11px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--blue); }
+    .lb-close { position: fixed; top: 24px; right: 28px; font-size: 30px; color: rgba(240,240,240,0.5); cursor: pointer; background: none; border: none; line-height: 1; transition: color 0.2s; }
+    .lb-close:hover { color: var(--blue); }
+    .lb-nav { display: flex; gap: 14px; align-items: center; }
+    .lb-nav button { font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 10px 26px; border-radius: 3px; border: 1.5px solid rgba(255,255,255,0.2); background: transparent; color: rgba(240,240,240,0.7); cursor: pointer; transition: all 0.2s; }
+    .lb-nav button:hover { border-color: var(--blue); color: var(--blue); }
+    .lb-counter { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; color: rgba(240,240,240,0.35); min-width: 48px; text-align: center; }
+
+    /* ============================
+       ADMIN PANEL
+       Access: click footer logo 3×
+    ============================ */
+    .admin-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 9000; align-items: center; justify-content: center; }
+    .admin-overlay.open { display: flex; }
+
+    /* Password gate */
+    .admin-pw-modal { background: #111; border: 1px solid rgba(26,140,255,0.3); border-radius: 8px; padding: 40px 36px; width: 360px; text-align: center; }
+    .admin-pw-modal h3 { font-family: 'Bebas Neue', sans-serif; font-size: 32px; color: var(--white); margin-bottom: 6px; }
+    .admin-pw-modal p { font-size: 12px; color: var(--white-muted); margin-bottom: 24px; }
+    .admin-pw-input { width: 100%; background: #1e1e1e; border: 1px solid rgba(255,255,255,0.12); border-radius: 4px; padding: 13px 14px; font-family: 'Inter', sans-serif; font-size: 14px; color: var(--white); outline: none; text-align: center; letter-spacing: 0.1em; margin-bottom: 14px; }
+    .admin-pw-input:focus { border-color: var(--blue); }
+    .admin-pw-error { font-size: 12px; color: #ff6b6b; margin-bottom: 12px; display: none; font-weight: 600; }
+    .admin-pw-btn { width: 100%; padding: 14px; background: var(--blue); color: #fff; border: none; border-radius: 4px; font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; transition: background 0.2s; }
+    .admin-pw-btn:hover { background: var(--blue-bright); }
+    .admin-pw-cancel { display: block; margin-top: 14px; font-size: 12px; color: var(--white-muted); cursor: pointer; text-decoration: underline; }
+    .admin-pw-cancel:hover { color: var(--white); }
+
+    /* Admin panel */
+    .admin-panel { display: none; background: #111; border: 1px solid rgba(26,140,255,0.25); border-radius: 10px; width: min(700px, 95vw); max-height: 88vh; overflow-y: auto; flex-direction: column; }
+    .admin-panel.open { display: flex; }
+    .admin-panel-header { padding: 24px 28px 20px; border-bottom: 1px solid rgba(255,255,255,0.07); display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; background: #111; z-index: 2; }
+    .admin-panel-header h3 { font-family: 'Bebas Neue', sans-serif; font-size: 28px; color: var(--white); letter-spacing: 0.04em; }
+    .admin-panel-header span { font-size: 11px; color: var(--blue); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+    .admin-close { background: none; border: none; color: rgba(240,240,240,0.4); font-size: 22px; cursor: pointer; line-height: 1; transition: color 0.2s; }
+    .admin-close:hover { color: var(--white); }
+    .admin-panel-body { padding: 24px 28px; display: flex; flex-direction: column; gap: 28px; }
+
+    /* Add photo form */
+    .admin-add-form { background: #161616; border: 1px solid rgba(255,255,255,0.07); border-radius: 6px; padding: 22px 20px; }
+    .admin-add-form h4 { font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--blue); margin-bottom: 16px; }
+    .admin-field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+    @media (max-width: 520px) { .admin-field-row { grid-template-columns: 1fr; } }
+    .admin-field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 12px; }
+    .admin-field label { font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--white-muted); }
+    .admin-field input, .admin-field select { background: #1e1e1e; border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; padding: 11px 13px; font-family: 'Inter', sans-serif; font-size: 13px; color: var(--white); outline: none; -webkit-appearance: none; appearance: none; width: 100%; transition: border-color 0.2s; }
+    .admin-field input:focus, .admin-field select:focus { border-color: var(--blue); }
+    .admin-field input::placeholder { color: rgba(240,240,240,0.22); }
+    .admin-field select option { background: #1e1e1e; }
+    .admin-add-btn { width: 100%; padding: 13px; background: var(--blue); color: #fff; border: none; border-radius: 4px; font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; transition: background 0.2s; }
+    .admin-add-btn:hover { background: var(--blue-bright); }
+
+    /* Photo list */
+    .admin-photo-list h4 { font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--white-muted); margin-bottom: 14px; }
+    .admin-photo-items { display: flex; flex-direction: column; gap: 8px; }
+    .admin-photo-item { background: #161616; border: 1px solid rgba(255,255,255,0.07); border-radius: 5px; padding: 12px 14px; display: flex; align-items: center; gap: 14px; }
+    .admin-thumb { width: 60px; height: 44px; border-radius: 3px; object-fit: cover; background: #1e1e1e; flex-shrink: 0; border: 1px solid rgba(255,255,255,0.08); }
+    .admin-thumb-placeholder { width: 60px; height: 44px; border-radius: 3px; background: #1e1e1e; flex-shrink: 0; border: 1px solid rgba(255,255,255,0.08); display: flex; align-items: center; justify-content: center; font-size: 18px; opacity: 0.5; }
+    .admin-photo-info { flex: 1; min-width: 0; }
+    .admin-photo-sport { font-size: 10px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--blue); margin-bottom: 3px; }
+    .admin-photo-url { font-size: 11px; color: rgba(240,240,240,0.4); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .admin-featured-badge { font-size: 9px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--blue); background: rgba(26,140,255,0.12); border: 1px solid rgba(26,140,255,0.25); border-radius: 3px; padding: 2px 7px; white-space: nowrap; }
+    .admin-delete-btn { background: none; border: 1px solid rgba(255,100,100,0.25); border-radius: 3px; color: rgba(255,100,100,0.6); font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 5px 11px; cursor: pointer; transition: all 0.2s; flex-shrink: 0; }
+    .admin-delete-btn:hover { border-color: #ff6b6b; color: #ff6b6b; background: rgba(255,107,107,0.07); }
+    .admin-empty-list { font-size: 13px; color: rgba(240,240,240,0.3); text-align: center; padding: 24px; }
+    .admin-note { font-size: 11px; color: rgba(240,240,240,0.35); line-height: 1.55; background: rgba(26,140,255,0.05); border: 1px solid rgba(26,140,255,0.12); border-radius: 4px; padding: 12px 14px; }
+    .admin-note strong { color: var(--blue); }
+
+    /* INTRO */
+    .intro { background: var(--gray-dark); border-top: 1px solid rgba(255,255,255,0.06); border-bottom: 1px solid rgba(255,255,255,0.06); padding: 56px 20px; text-align: center; }
+    .intro p { max-width: 640px; margin: 0 auto; font-size: clamp(15px,2.2vw,18px); line-height: 1.7; color: var(--white-muted); }
+    .intro p strong { color: var(--white); font-weight: 700; }
+    .stat-strip { display: flex; justify-content: center; gap: 48px; margin-top: 40px; flex-wrap: wrap; }
+    .stat { text-align: center; }
+    .stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 48px; color: var(--blue); line-height: 1; }
+    .stat-label { font-size: 11px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--white-muted); margin-top: 4px; }
+
+    /* PACKAGES */
+    .packages { background: var(--black); padding: 80px 20px 100px; }
+    .packages-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 16px; max-width: 900px; margin: 0 auto; }
+    @media (max-width: 600px) { .packages-grid { grid-template-columns: 1fr; } }
+    .pkg-card { background: var(--gray-dark); border: 1px solid rgba(255,255,255,0.07); border-radius: 6px; overflow: hidden; transition: border-color 0.25s, transform 0.25s; position: relative; }
+    .pkg-card:hover { border-color: var(--blue); transform: translateY(-4px); }
+    .pkg-card.featured { border-color: var(--blue); }
+    .pkg-card.featured::before { content: 'MOST POPULAR'; position: absolute; top: 0; right: 0; background: var(--blue); color: #fff; font-family: 'Inter', sans-serif; font-size: 9px; font-weight: 800; letter-spacing: 0.18em; padding: 5px 14px; border-radius: 0 6px 0 6px; }
+    .pkg-body { padding: 24px 22px 28px; }
+    .pkg-badge { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--blue); margin-bottom: 8px; }
+    .pkg-name { font-family: 'Bebas Neue', sans-serif; font-size: 34px; color: var(--white); line-height: 1; margin-bottom: 14px; }
+    .pkg-features { list-style: none; margin-bottom: 22px; }
+    .pkg-features li { font-size: 13px; color: var(--white-muted); padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: flex-start; gap: 8px; line-height: 1.4; }
+    .pkg-features li::before { content: ''; display: inline-block; width: 5px; height: 5px; border-radius: 50%; background: var(--blue); flex-shrink: 0; margin-top: 5px; }
+    .pkg-price { font-family: 'Bebas Neue', sans-serif; font-size: 42px; color: var(--white); line-height: 1; }
+    .pkg-price span { font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 600; color: var(--white-muted); letter-spacing: 0.1em; text-transform: uppercase; margin-left: 6px; vertical-align: middle; }
+
+    /* ADD-ONS */
+    .addons { background: var(--gray-dark); padding: 72px 20px; border-top: 1px solid rgba(255,255,255,0.06); }
+    .addons-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; max-width: 860px; margin: 0 auto; }
+    @media (max-width: 700px) { .addons-grid { grid-template-columns: repeat(2,1fr); } }
+    .addon-chip { background: var(--gray-mid); border: 1px solid rgba(255,255,255,0.08); border-radius: 4px; padding: 18px 16px; transition: border-color 0.2s, background 0.2s; }
+    .addon-chip:hover { border-color: var(--blue); background: rgba(26,140,255,0.05); }
+    .addon-chip-icon { font-size: 22px; margin-bottom: 10px; }
+    .addon-chip-name { font-size: 13px; font-weight: 700; color: var(--white); margin-bottom: 4px; }
+    .addon-chip-desc { font-size: 11px; color: var(--white-muted); line-height: 1.45; }
+
+    /* BOOKING */
+    .booking { background: var(--black); padding: 80px 20px 120px; border-top: 1px solid rgba(255,255,255,0.06); }
+    .form-wrapper { background: var(--gray-dark); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; padding: 40px 32px; max-width: 680px; margin: 0 auto; }
+    @media (max-width: 480px) { .form-wrapper { padding: 28px 20px; } }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    @media (max-width: 540px) { .form-row { grid-template-columns: 1fr; } }
+    .form-group { display: flex; flex-direction: column; margin-bottom: 14px; }
+    .form-group label { font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--white-muted); margin-bottom: 7px; }
+    .form-group input, .form-group select, .form-group textarea { background: var(--gray-mid); border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; padding: 13px 14px; font-family: 'Inter', sans-serif; font-size: 14px; color: var(--white); transition: border-color 0.2s; outline: none; -webkit-appearance: none; appearance: none; width: 100%; }
+    .form-group input::placeholder, .form-group textarea::placeholder { color: rgba(240,240,240,0.25); }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--blue); }
+    .form-group select { cursor: pointer; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23888' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px; }
+    .form-group select option { background: #1e1e1e; color: #f0f0f0; }
+    .form-group textarea { resize: vertical; min-height: 100px; line-height: 1.5; }
+    .form-submit-btn { width: 100%; padding: 17px; background: var(--blue); color: #fff; border: none; border-radius: 4px; font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; transition: background 0.2s, transform 0.15s; margin-top: 6px; }
+    .form-submit-btn:hover { background: var(--blue-bright); transform: translateY(-2px); }
+    .form-success { display: none; text-align: center; padding: 48px 20px; }
+    .form-success.show { display: block; }
+    .form-success-icon { font-size: 48px; margin-bottom: 16px; }
+    .form-success h3 { font-family: 'Bebas Neue', sans-serif; font-size: 42px; color: var(--white); margin-bottom: 12px; }
+    .form-success p { color: var(--white-muted); font-size: 15px; line-height: 1.6; }
+
+    /* FINAL CTA */
+    .final-cta { background: var(--blue); padding: 80px 20px; text-align: center; position: relative; overflow: hidden; }
+    .final-cta::before { content: 'ONTIVISIONS'; position: absolute; font-family: 'Bebas Neue', sans-serif; font-size: 220px; color: rgba(0,0,0,0.12); top: 50%; left: 50%; transform: translate(-50%,-50%); white-space: nowrap; pointer-events: none; }
+    .final-cta-content { position: relative; z-index: 2; }
+    .final-cta h2 { font-size: clamp(52px,9vw,96px); color: #fff; margin-bottom: 20px; }
+    .final-cta p { font-size: 15px; color: rgba(255,255,255,0.8); margin-bottom: 32px; max-width: 380px; margin-left: auto; margin-right: auto; line-height: 1.6; }
+    .final-cta .btn { background: #fff; color: var(--blue); }
+    .final-cta .btn:hover { background: #e8f3ff; transform: translateY(-2px); }
+
+    /* FOOTER */
+    footer { background: #050505; padding: 40px 20px 80px; text-align: center; border-top: 1px solid rgba(255,255,255,0.06); }
+    @media (min-width: 768px) { footer { padding-bottom: 40px; } }
+    .footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 32px; color: var(--white); letter-spacing: 0.08em; margin-bottom: 20px; cursor: pointer; user-select: none; display: inline-block; }
+    .footer-logo span { color: var(--blue); }
+    .footer-links { display: flex; justify-content: center; gap: 28px; flex-wrap: wrap; margin-bottom: 20px; }
+    .footer-links a { font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--white-muted); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--blue); }
+    .footer-copy { font-size: 11px; color: rgba(240,240,240,0.25); letter-spacing: 0.05em; }
   </style>
 </head>
 <body>
 
-  <!-- NAV -->
-  <nav id="navbar">
-    <!-- LOGO PLACEHOLDER — NAV
-         To add your logo: replace the <span> below with:
-         <img src="your-logo.png" alt="Ontivisions" style="height:36px; width:auto;" />
-         Recommended: PNG with transparent background, ~120x36px or similar
-    -->
-    <a href="#" class="nav-logo">
-      <span class="logo-img-slot" style="display:inline-flex; align-items:center; gap:10px;">
-        <span class="logo-placeholder-box" style="
-          display:inline-block;
-          width:32px; height:32px;
-          border:1.5px dashed rgba(26,140,255,0.5);
-          border-radius:4px;
-          background:rgba(26,140,255,0.06);
-          vertical-align:middle;
-          font-size:8px;
-          font-family:'Inter',sans-serif;
-          font-weight:700;
-          letter-spacing:0.05em;
-          color:rgba(26,140,255,0.5);
-          display:inline-flex;
-          align-items:center;
-          justify-content:center;
-          text-transform:uppercase;
-        ">LOGO</span>
-        ONTI<span>VISIONS</span>
-      </span>
-    </a>
-    <ul class="nav-links">
-      <li><a href="#packages">Packages</a></li>
-      <li><a href="#addons">Add-ons</a></li>
-      <li><a href="#booking">Book Now</a></li>
-    </ul>
-  </nav>
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">ONTI<span>VISIONS</span></a>
+  <ul class="nav-links">
+    <li><a href="#portfolio">Portfolio</a></li>
+    <li><a href="#packages">Packages</a></li>
+    <li><a href="#addons">Add-ons</a></li>
+    <li><a href="#booking">Book Now</a></li>
+  </ul>
+</nav>
 
-  <!-- HERO -->
-  <section class="hero" id="top">
-    <div class="hero-glow"></div>
-    <div class="hero-photo"></div>
-    <div class="hero-slash"></div>
-
-    <div class="hero-content">
-      <!-- LOGO PLACEHOLDER — HERO
-           To add your logo: replace the div below with:
-           <img src="your-logo.png" alt="Ontivisions" style="height:64px; width:auto; margin-bottom:28px;" />
-           Recommended: white or light PNG, transparent background, ~200x64px
-      -->
-      <div class="hero-logo-slot" style="
-        margin-bottom: 28px;
-        display: flex;
-        justify-content: center;
-      ">
-        <div style="
-          width:180px; height:60px;
-          border:1.5px dashed rgba(26,140,255,0.35);
-          border-radius:6px;
-          background:rgba(26,140,255,0.04);
-          display:flex;
-          align-items:center;
-          justify-content:center;
-          font-family:'Inter',sans-serif;
-          font-size:10px;
-          font-weight:700;
-          letter-spacing:0.2em;
-          text-transform:uppercase;
-          color:rgba(26,140,255,0.4);
-        ">YOUR LOGO HERE</div>
-      </div>
-      <span class="eyebrow">Arizona Sports Photography</span>
-      <h1>
-        Premium Sports<br>
-        <span class="blue">Photography</span><br>
-        <span style="font-size: 0.45em; font-family: 'Inter', sans-serif; font-weight: 800; letter-spacing: 0.1em; color: rgba(240,240,240,0.6);">Built For Athletes.</span>
-      </h1>
-      <p class="hero-sub">
-        Game day coverage, media days, private athlete sessions, and team content by Ontivisions.
-      </p>
-      <div class="hero-btns">
-        <a href="#packages" class="btn btn-primary">View Packages</a>
-        <a href="#booking" class="btn btn-outline">Book Coverage</a>
-      </div>
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-glow"></div>
+  <div class="hero-photo"></div>
+  <div class="hero-slash"></div>
+  <div class="hero-content">
+    <span class="eyebrow">Arizona Sports Photography</span>
+    <h1>Premium Sports<br><span class="blue">Photography</span></h1>
+    <p style="font-size:clamp(12px,2vw,16px);font-weight:800;letter-spacing:0.14em;text-transform:uppercase;color:var(--white-muted);margin-bottom:16px;">Built For Athletes.</p>
+    <p class="hero-sub">Game day coverage, media days, private athlete sessions, and team content by Ontivisions.</p>
+    <div class="hero-btns">
+      <a href="#portfolio" class="btn btn-primary">View Portfolio</a>
+      <a href="#booking" class="btn btn-outline">Book Coverage</a>
     </div>
+  </div>
+  <div class="hero-bar"></div>
+</section>
 
-    <div class="hero-bar"></div>
+<!-- PORTFOLIO -->
+<section class="portfolio" id="portfolio">
+  <div class="section-header reveal">
+    <span class="eyebrow">The Work</span>
+    <h2>Portfolio</h2>
+    <p>Game day moments and team media days across Arizona.</p>
+  </div>
+  <div class="portfolio-filters reveal reveal-delay-1" id="pfFilters">
+    <button class="pf-btn active" onclick="filterPortfolio('all',this)">All</button>
+    <button class="pf-btn" onclick="filterPortfolio('football',this)">Football</button>
+    <button class="pf-btn" onclick="filterPortfolio('basketball',this)">Basketball</button>
+    <button class="pf-btn" onclick="filterPortfolio('7v7',this)">7v7</button>
+    <button class="pf-btn" onclick="filterPortfolio('softball',this)">Softball</button>
+  </div>
+  <div class="portfolio-grid reveal reveal-delay-2" id="pfGrid"></div>
+  <div class="portfolio-more" id="pfMore"></div>
+  <div class="portfolio-actions reveal reveal-delay-3">
+    <button class="pf-expand-btn" id="pfExpandBtn" onclick="toggleMore()" style="display:none">+ View More Work</button>
+    <a href="#booking" class="btn btn-primary">Book a Session</a>
+  </div>
+</section>
 
-  </section>
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="lbBgClose(event)">
+  <button class="lb-close" onclick="closeLB()">✕</button>
+  <div class="lb-img-wrap" id="lbImgWrap"></div>
+  <div class="lb-counter" id="lbCounter"></div>
+  <div class="lb-nav">
+    <button onclick="navLB(-1)">← Prev</button>
+    <button onclick="navLB(1)">Next →</button>
+  </div>
+</div>
 
-  <!-- INTRO -->
-  <section class="intro" id="intro">
-    <span class="eyebrow reveal">Who We Are</span>
-    <p class="reveal reveal-delay-1">
-      <strong>Ontivisions creates professional, high-energy sports photography</strong> for athletes, teams, coaches, and parents across Arizona. From game day action to media days and private athlete sessions — we deliver gallery-quality images that showcase your best moments. Football, basketball, 7v7, softball, and more.
-    </p>
-    <div class="stat-strip">
-      <div class="stat reveal reveal-delay-2">
-        <div class="stat-num">48H</div>
-        <div class="stat-label">Turnaround</div>
-      </div>
-      <div class="stat reveal reveal-delay-3">
-        <div class="stat-num">HD</div>
-        <div class="stat-label">Digital Delivery</div>
-      </div>
-      <div class="stat reveal reveal-delay-4">
-        <div class="stat-num">5+</div>
-        <div class="stat-label">Sports Covered</div>
-      </div>
-      <div class="stat reveal reveal-delay-5">
-        <div class="stat-num">AZ</div>
-        <div class="stat-label">Based & Ready</div>
-      </div>
-    </div>
-  </section>
+<!-- ADMIN OVERLAY -->
+<div class="admin-overlay" id="adminOverlay">
 
-  <!-- PACKAGES -->
-  <section class="packages" id="packages">
-    <div class="section-header reveal">
-      <span class="eyebrow">Coverage Options</span>
-      <h2>Packages</h2>
-      <p>Choose the level of coverage that fits your program, team, or athlete.</p>
-    </div>
-
-    <div class="packages-grid container">
-
-      <!-- Package 1 -->
-      <div class="pkg-card reveal reveal-delay-1">
-        <div class="pkg-photo">
-          <div class="pkg-photo-bar"></div>
-        </div>
-        <div class="pkg-body">
-          <div class="pkg-badge">Individual</div>
-          <div class="pkg-name">Private Athlete Session</div>
-          <ul class="pkg-features">
-            <li>Best for individual athletes</li>
-            <li>Posed and action-style shots</li>
-            <li>Full game coverage included</li>
-            <li>Edited digital gallery delivered</li>
-          </ul>
-          <div class="pkg-price">$_<span>Starting at</span></div>
-        </div>
-      </div>
-
-      <!-- Package 2 -->
-      <div class="pkg-card featured reveal reveal-delay-2">
-        <div class="pkg-photo">
-          <div class="pkg-photo-bar"></div>
-        </div>
-        <div class="pkg-body">
-          <div class="pkg-badge">Live Action</div>
-          <div class="pkg-name">Game Day Coverage</div>
-          <ul class="pkg-features">
-            <li>Best for live games</li>
-            <li>Action shots, sideline moments &amp; celebrations</li>
-            <li>Key plays captured in full</li>
-            <li>Edited gallery + fast turnaround</li>
-          </ul>
-          <div class="pkg-price">$_<span>Starting at</span></div>
-        </div>
-      </div>
-
-      <!-- Package 3 -->
-      <div class="pkg-card reveal reveal-delay-3">
-        <div class="pkg-photo">
-          <div class="pkg-photo-bar"></div>
-        </div>
-        <div class="pkg-body">
-          <div class="pkg-badge">Full Team</div>
-          <div class="pkg-name">Team Media Day</div>
-          <ul class="pkg-features">
-            <li>Best for full teams &amp; programs</li>
-            <li>Individual portraits + group team photos</li>
-            <li>Creative graphics &amp; social media content</li>
-            <li>Shareable, ready-to-post files included</li>
-          </ul>
-          <div class="pkg-price">$_<span>Starting at</span></div>
-        </div>
-      </div>
-
-      <!-- Package 4 -->
-      <div class="pkg-card reveal reveal-delay-4">
-        <div class="pkg-photo">
-          <div class="pkg-photo-bar"></div>
-        </div>
-        <div class="pkg-body">
-          <div class="pkg-badge">Season Package</div>
-          <div class="pkg-name">Full Program Coverage</div>
-          <ul class="pkg-features">
-            <li>Best for programs wanting consistent coverage</li>
-            <li>Multiple games and sessions included</li>
-            <li>Priority booking all season long</li>
-            <li>Custom content plan built for your team</li>
-          </ul>
-          <div class="pkg-price" style="font-size: 30px;">Custom<span>Quote</span></div>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ADD-ONS -->
-  <section class="addons" id="addons">
-    <div class="section-header reveal">
-      <span class="eyebrow">Level Up</span>
-      <h2>Add-Ons</h2>
-      <p>Customize your package with extras that get you more mileage from every shoot.</p>
-    </div>
-
-    <div class="addons-grid container">
-      <div class="addon-chip reveal reveal-delay-1">
-        <div class="addon-chip-icon">⚡</div>
-        <div class="addon-chip-name">Rush Delivery</div>
-        <div class="addon-chip-desc">Same-day or next-day gallery turnaround for time-sensitive events.</div>
-      </div>
-      <div class="addon-chip reveal reveal-delay-2">
-        <div class="addon-chip-icon">📱</div>
-        <div class="addon-chip-name">Social Media Graphics</div>
-        <div class="addon-chip-desc">Branded graphics and overlays formatted for posts and stories.</div>
-      </div>
-      <div class="addon-chip reveal reveal-delay-3">
-        <div class="addon-chip-icon">🖼️</div>
-        <div class="addon-chip-name">Full Team Gallery</div>
-        <div class="addon-chip-desc">Private online gallery shared with the entire team and parents.</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- BOOKING FORM -->
-  <section class="booking" id="booking">
-    <div class="section-header reveal">
-      <span class="eyebrow">Get Covered</span>
-      <h2>Book Your Session</h2>
-      <p>Fill out the form and we'll reach out within 24 hours to confirm your date.</p>
-    </div>
-
-    <div class="form-wrapper reveal">
-
-      <!-- SUCCESS STATE -->
-      <div class="form-success" id="formSuccess">
-        <div class="form-success-icon">✅</div>
-        <h3>Request Sent!</h3>
-        <p>We received your booking request and will reach out within 24 hours to lock in your coverage. Check your email for a confirmation.</p>
-      </div>
-
-      <!--
-        MONDAY.COM INTEGRATION — Board: "Ethan Website Leads" (ID: 18418478088)
-        This form posts directly to Monday.com via a Cloudflare Worker proxy.
-
-        HOW TO ACTIVATE:
-        1. Go to your Cloudflare Worker (frosty-union-afc6.kris-384.workers.dev)
-        2. Copy the existing SOKO Designs worker code and deploy a NEW worker for Ontivisions
-        3. In the new worker, set:
-              MONDAY_BOARD_ID = "18418478088"
-              MONDAY_GROUP_ID = "topics"   (this is the "New Leads" group)
-        4. Paste your new worker URL into the WORKER_URL constant below
-        5. Make sure your Monday.com API token is set in the worker's environment variables
-
-        Column ID reference (do not change these — they match the live board):
-          name                  = item name (contact's name)
-          phoneyccxxz9x         = Phone
-          email4534pr3a         = Email
-          short_textmnssydcm    = Location / City
-          single_selectwhmwcjv  = Sport (status column)
-          long_texttcnuinic     = What Are You Looking For?
-          single_selecttdksrhl  = Package (status column)
-          color_mm42b37j        = Status (set to "Follow up needed" on new leads)
-          date_mm42tg46         = Event / Session Date
-          text_mm4ef6ny         = Athlete / Team Name
-          dropdown_mm4ea842     = Budget Range (dropdown)
-      -->
-      <form class="booking-form" id="bookingForm" name="ontivisions-booking" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate>
-        <input type="hidden" name="form-name" value="ontivisions-booking" />
-        <p style="display:none;"><input name="bot-field" /></p>
-
-        <div class="form-row">
-          <div class="form-group">
-            <label for="f-name">Your Name *</label>
-            <input type="text" id="f-name" name="name" placeholder="First Last" required />
-          </div>
-          <div class="form-group">
-            <label for="f-email">Email Address *</label>
-            <input type="email" id="f-email" name="email" placeholder="you@email.com" required />
-          </div>
-        </div>
-
-        <div class="form-row">
-          <div class="form-group">
-            <label for="f-phone">Phone Number</label>
-            <input type="tel" id="f-phone" name="phone" placeholder="(480) 000-0000" />
-          </div>
-          <div class="form-group">
-            <label for="f-athlete">Athlete / Team Name *</label>
-            <input type="text" id="f-athlete" name="athlete-team" placeholder="Name or team" required />
-          </div>
-        </div>
-
-        <div class="form-row">
-          <div class="form-group">
-            <label for="f-sport">Sport *</label>
-            <select id="f-sport" name="sport" required>
-              <option value="" disabled selected>Select a sport</option>
-              <option value="Football">Football</option>
-              <option value="Basketball">Basketball</option>
-              <option value="Baseball / Softball">Baseball / Softball</option>
-              <option value="Track &amp; Field">Track &amp; Field</option>
-              <option value="Other">Other</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="f-package">Package *</label>
-            <select id="f-package" name="package" required>
-              <option value="" disabled selected>Select a package</option>
-              <option value="Basic">Private Athlete Session</option>
-              <option value="Standard">Game Day Coverage</option>
-              <option value="Premium">Team Media Day</option>
-              <option value="Elite">Full Program Coverage</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="form-row">
-          <div class="form-group">
-            <label for="f-date">Event / Session Date</label>
-            <input type="date" id="f-date" name="event-date" />
-          </div>
-          <div class="form-group">
-            <label for="f-location">Location / City</label>
-            <input type="text" id="f-location" name="location" placeholder="City or venue" />
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label for="f-budget">Budget Range</label>
-          <select id="f-budget" name="budget">
-            <option value="" disabled selected>Select a range</option>
-            <option value="Under $100">Under $100</option>
-            <option value="$100 - $250">$100 – $250</option>
-            <option value="$250 - $500">$250 – $500</option>
-            <option value="$500 - $1,000">$500 – $1,000</option>
-            <option value="$1,000+">$1,000+</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label for="f-notes">What Are You Looking For?</label>
-          <textarea id="f-notes" name="notes" placeholder="Tell us about your event, specific shots you want, add-ons you're interested in, etc."></textarea>
-        </div>
-
-        <div id="formError" style="display:none; color:#ff6b6b; font-size:13px; margin-bottom:12px; font-weight:600;"></div>
-
-        <button type="submit" class="form-submit-btn" id="submitBtn">Send Booking Request →</button>
-
-      </form>
-    </div>
-  </section>
-
-  <!-- FINAL CTA -->
-  <section class="final-cta">
-    <div class="final-cta-content">
-      <h2>Ready to Lock In Your Coverage?</h2>
-      <p>Premium game day and athlete photography available now. Spots fill fast on weekends.</p>
-      <a href="#booking" class="btn">Book Ontivisions</a>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer>
-    <!-- LOGO PLACEHOLDER — FOOTER
-         To add your logo: replace the div below with:
-         <img src="your-logo.png" alt="Ontivisions" style="height:52px; width:auto; margin-bottom:20px;" />
-    -->
-    <div style="display:flex; justify-content:center; margin-bottom:16px;">
-      <div style="
-        width:140px; height:48px;
-        border:1.5px dashed rgba(26,140,255,0.3);
-        border-radius:5px;
-        background:rgba(26,140,255,0.04);
-        display:flex;
-        align-items:center;
-        justify-content:center;
-        font-family:'Inter',sans-serif;
-        font-size:9px;
-        font-weight:700;
-        letter-spacing:0.2em;
-        text-transform:uppercase;
-        color:rgba(26,140,255,0.35);
-      ">YOUR LOGO</div>
-    </div>
-    <div class="footer-logo">ONTI<span>VISIONS</span></div>
-    <div class="footer-links">
-      <a href="https://instagram.com/ontivisions" target="_blank">@ontivisions</a>
-      <a href="tel:4804165306">(480) 416-5306</a>
-      <a href="mailto:ontivisions@gmail.com">ontivisions@gmail.com</a>
-      <a href="#packages">Packages</a>
-      <a href="#booking">Book Now</a>
-    </div>
-    <p class="footer-copy">© <span id="year"></span> Ontivisions. All rights reserved. Arizona Sports Photography.</p>
-  </footer>
-
-  <!-- STICKY MOBILE CTA -->
-  <div class="sticky-cta" id="stickyCta">
-    <a href="#packages" class="btn btn-outline">Packages</a>
-    <a href="#booking" class="btn btn-primary">Book Now</a>
+  <!-- Password gate -->
+  <div class="admin-pw-modal" id="adminPwModal">
+    <h3>Admin Access</h3>
+    <p>Enter your password to manage portfolio photos.</p>
+    <input type="password" class="admin-pw-input" id="adminPwInput" placeholder="Password" onkeydown="if(event.key==='Enter')checkPw()">
+    <div class="admin-pw-error" id="adminPwError">Incorrect password. Try again.</div>
+    <button class="admin-pw-btn" onclick="checkPw()">Enter</button>
+    <span class="admin-pw-cancel" onclick="closeAdmin()">Cancel</span>
   </div>
 
-  <!-- JAVASCRIPT -->
-  <script>
-    // ─── Year ───
-    document.getElementById('year').textContent = new Date().getFullYear();
+  <!-- Admin panel (shown after correct password) -->
+  <div class="admin-panel" id="adminPanel">
+    <div class="admin-panel-header">
+      <div>
+        <h3>Portfolio Manager</h3>
+        <span>Ontivisions Admin</span>
+      </div>
+      <button class="admin-close" onclick="closeAdmin()">✕</button>
+    </div>
+    <div class="admin-panel-body">
 
-    // ─── Navbar scroll ───
-    const navbar = document.getElementById('navbar');
-    window.addEventListener('scroll', () => {
-      navbar.classList.toggle('scrolled', window.scrollY > 50);
+      <div class="admin-note">
+        <strong>How to add photos:</strong> Paste a direct image URL (from Google Drive, Dropbox, Instagram CDN, or any public image link). Choose the sport and whether it's a featured wide shot. Changes save instantly and appear on the page.
+      </div>
+
+      <!-- Add photo form -->
+      <div class="admin-add-form">
+        <h4>+ Add New Photo</h4>
+
+        <!-- Upload tabs -->
+        <div style="display:flex;gap:0;margin-bottom:18px;border:1px solid rgba(255,255,255,0.1);border-radius:4px;overflow:hidden;">
+          <button id="tabUpload" onclick="switchTab('upload')" style="flex:1;padding:9px;font-family:'Inter',sans-serif;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;border:none;cursor:pointer;background:var(--blue);color:#fff;transition:all .2s;">📁 Upload from Device</button>
+          <button id="tabUrl" onclick="switchTab('url')" style="flex:1;padding:9px;font-family:'Inter',sans-serif;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;border:none;cursor:pointer;background:#1e1e1e;color:rgba(240,240,240,0.5);transition:all .2s;">🔗 Paste URL</button>
+        </div>
+
+        <!-- Upload from device -->
+        <div id="panelUpload">
+          <div id="dropZone" onclick="document.getElementById('fileInput').click()" style="border:2px dashed rgba(26,140,255,0.35);border-radius:6px;padding:32px 20px;text-align:center;cursor:pointer;transition:border-color .2s,background .2s;margin-bottom:14px;">
+            <div style="font-size:28px;margin-bottom:8px;">📸</div>
+            <div style="font-size:13px;font-weight:700;color:var(--white);margin-bottom:4px;">Click to choose photos</div>
+            <div style="font-size:11px;color:rgba(240,240,240,0.4);">JPG, PNG, HEIC · Auto-compressed · Multiple OK</div>
+          </div>
+          <input type="file" id="fileInput" accept="image/*" multiple style="display:none" onchange="handleFiles(this.files)">
+          <div id="uploadPreview" style="display:none;margin-bottom:14px;">
+            <div style="font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(240,240,240,0.5);margin-bottom:8px;">Selected Photos</div>
+            <div id="uploadPreviewItems" style="display:flex;flex-wrap:wrap;gap:8px;"></div>
+          </div>
+        </div>
+
+        <!-- Paste URL -->
+        <div id="panelUrl" style="display:none;">
+          <div class="admin-field">
+            <label>Image URL</label>
+            <input type="url" id="newPhotoUrl" placeholder="https://your-image-url.com/photo.jpg">
+          </div>
+        </div>
+
+        <div class="admin-field-row">
+          <div class="admin-field" style="margin-bottom:0">
+            <label>Sport *</label>
+            <select id="newPhotoSport">
+              <option value="football">Football</option>
+              <option value="basketball">Basketball</option>
+              <option value="7v7">7v7</option>
+              <option value="softball">Softball</option>
+            </select>
+          </div>
+          <div class="admin-field" style="margin-bottom:0">
+            <label>Label / Caption</label>
+            <input type="text" id="newPhotoLabel" placeholder="e.g. Game Day, Action Shot">
+          </div>
+        </div>
+        <div class="admin-field" style="margin-top:12px;flex-direction:row;align-items:center;gap:10px;margin-bottom:16px;">
+          <input type="checkbox" id="newPhotoFeatured" style="width:16px;height:16px;accent-color:var(--blue);cursor:pointer;flex-shrink:0;">
+          <label for="newPhotoFeatured" style="font-size:12px;text-transform:none;letter-spacing:0;cursor:pointer;margin-bottom:0;">Featured photo (wide, shows first in grid)</label>
+        </div>
+        <div id="uploadProgress" style="display:none;margin-bottom:12px;">
+          <div style="height:4px;background:#1e1e1e;border-radius:2px;overflow:hidden;">
+            <div id="uploadProgressBar" style="height:100%;background:var(--blue);width:0%;transition:width .3s;"></div>
+          </div>
+          <div id="uploadProgressText" style="font-size:11px;color:rgba(240,240,240,0.5);margin-top:6px;text-align:center;"></div>
+        </div>
+        <button class="admin-add-btn" onclick="addPhoto()">Add to Portfolio</button>
+      </div>
+
+      <!-- Current photo list -->
+      <div class="admin-photo-list">
+        <h4 id="photoListLabel">Current Photos (0)</h4>
+        <div class="admin-photo-items" id="adminPhotoItems"></div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<!-- INTRO -->
+<section class="intro" id="intro">
+  <span class="eyebrow reveal">Who We Are</span>
+  <p class="reveal reveal-delay-1">
+    <strong>Ontivisions creates professional, high-energy sports photography</strong> for athletes, teams, coaches, and parents across Arizona. From game day action to media days and private athlete sessions — we deliver gallery-quality images that showcase your best moments. Football, basketball, 7v7, softball, and more.
+  </p>
+  <div class="stat-strip">
+    <div class="stat reveal reveal-delay-2"><div class="stat-num">48H</div><div class="stat-label">Turnaround</div></div>
+    <div class="stat reveal reveal-delay-3"><div class="stat-num">HD</div><div class="stat-label">Digital Delivery</div></div>
+    <div class="stat reveal reveal-delay-4"><div class="stat-num">5+</div><div class="stat-label">Sports Covered</div></div>
+    <div class="stat reveal reveal-delay-5"><div class="stat-num">AZ</div><div class="stat-label">Based &amp; Ready</div></div>
+  </div>
+</section>
+
+<!-- PACKAGES -->
+<section class="packages" id="packages">
+  <div class="section-header reveal">
+    <span class="eyebrow">Coverage Options</span>
+    <h2>Packages</h2>
+    <p>Choose the level of coverage that fits your program, team, or athlete.</p>
+  </div>
+  <div class="packages-grid container">
+    <div class="pkg-card reveal reveal-delay-1">
+      <div class="pkg-body">
+        <div class="pkg-badge">Individual</div>
+        <div class="pkg-name">Private Athlete Session</div>
+        <ul class="pkg-features">
+          <li>Best for individual athletes</li><li>Posed and action-style shots</li>
+          <li>Full game coverage included</li><li>Edited digital gallery delivered</li>
+        </ul>
+        <div class="pkg-price">$250</div>
+      </div>
+    </div>
+    <div class="pkg-card featured reveal reveal-delay-2">
+      <div class="pkg-body">
+        <div class="pkg-badge">Live Action</div>
+        <div class="pkg-name">Game Day Coverage</div>
+        <ul class="pkg-features">
+          <li>Best for live games</li><li>Action shots, sideline moments &amp; celebrations</li>
+          <li>Key plays captured in full</li><li>Edited gallery + fast turnaround</li>
+        </ul>
+        <div class="pkg-price">$600</div>
+      </div>
+    </div>
+    <div class="pkg-card reveal reveal-delay-3">
+      <div class="pkg-body">
+        <div class="pkg-badge">Full Team</div>
+        <div class="pkg-name">Team Media Day</div>
+        <ul class="pkg-features">
+          <li>Best for full teams &amp; programs</li><li>Individual portraits + group team photos</li>
+          <li>Creative graphics &amp; social media content</li><li>Shareable, ready-to-post files included</li>
+        </ul>
+        <div class="pkg-price">$500</div>
+      </div>
+    </div>
+    <div class="pkg-card reveal reveal-delay-4">
+      <div class="pkg-body">
+        <div class="pkg-badge">Season Package</div>
+        <div class="pkg-name">Full Program Coverage</div>
+        <ul class="pkg-features">
+          <li>Best for programs wanting consistent coverage</li><li>Multiple games and sessions included</li>
+          <li>Priority booking all season long</li><li>Custom content plan built for your team</li>
+        </ul>
+        <div class="pkg-price" style="font-size:30px;">Custom<span>Quote</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ADD-ONS -->
+<section class="addons" id="addons">
+  <div class="section-header reveal">
+    <span class="eyebrow">Level Up</span>
+    <h2>Add-Ons</h2>
+    <p>Customize your package with extras that get you more mileage from every shoot.</p>
+  </div>
+  <div class="addons-grid container">
+    <div class="addon-chip reveal reveal-delay-1">
+      <div class="addon-chip-icon">⚡</div>
+      <div class="addon-chip-name">Rush Delivery</div>
+      <div class="addon-chip-desc">Same-day or next-day gallery turnaround for time-sensitive events.</div>
+    </div>
+    <div class="addon-chip reveal reveal-delay-2">
+      <div class="addon-chip-icon">📱</div>
+      <div class="addon-chip-name">Social Media Graphics</div>
+      <div class="addon-chip-desc">Branded graphics and overlays formatted for posts and stories.</div>
+    </div>
+    <div class="addon-chip reveal reveal-delay-3">
+      <div class="addon-chip-icon">🖼️</div>
+      <div class="addon-chip-name">Full Team Gallery</div>
+      <div class="addon-chip-desc">Private online gallery shared with the entire team and parents.</div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING -->
+<section class="booking" id="booking">
+  <div class="section-header reveal">
+    <span class="eyebrow">Get Covered</span>
+    <h2>Book Your Session</h2>
+    <p>Fill out the form and we'll reach out within 24 hours to confirm your date.</p>
+  </div>
+  <div class="form-wrapper reveal">
+    <div class="form-success" id="formSuccess">
+      <div class="form-success-icon">✅</div>
+      <h3>Request Sent!</h3>
+      <p>We received your booking request and will reach out within 24 hours to lock in your coverage.</p>
+    </div>
+    <form id="bookingForm" name="ontivisions-booking" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate>
+      <input type="hidden" name="form-name" value="ontivisions-booking">
+      <p style="display:none;"><input name="bot-field"></p>
+      <div class="form-row">
+        <div class="form-group"><label for="f-name">Your Name *</label><input type="text" id="f-name" name="name" placeholder="First Last" required></div>
+        <div class="form-group"><label for="f-email">Email Address *</label><input type="email" id="f-email" name="email" placeholder="you@email.com" required></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label for="f-phone">Phone Number</label><input type="tel" id="f-phone" name="phone" placeholder="(480) 000-0000"></div>
+        <div class="form-group"><label for="f-athlete">Athlete / Team Name *</label><input type="text" id="f-athlete" name="athlete-team" placeholder="Name or team" required></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label for="f-sport">Sport *</label>
+          <select id="f-sport" name="sport" required>
+            <option value="" disabled selected>Select a sport</option>
+            <option>Football</option><option>Basketball</option><option>Baseball / Softball</option><option>Track &amp; Field</option><option>Other</option>
+          </select>
+        </div>
+        <div class="form-group"><label for="f-package">Package *</label>
+          <select id="f-package" name="package" required>
+            <option value="" disabled selected>Select a package</option>
+            <option>Private Athlete Session</option><option>Game Day Coverage</option><option>Team Media Day</option><option>Full Program Coverage</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label for="f-date">Event / Session Date</label><input type="date" id="f-date" name="event-date"></div>
+        <div class="form-group"><label for="f-location">Location / City</label><input type="text" id="f-location" name="location" placeholder="City or venue"></div>
+      </div>
+      <div class="form-group"><label for="f-budget">Budget Range</label>
+        <select id="f-budget" name="budget">
+          <option value="" disabled selected>Select a range</option>
+          <option>Under $100</option><option>$100 – $250</option><option>$250 – $500</option><option>$500 – $1,000</option><option>$1,000+</option>
+        </select>
+      </div>
+      <div class="form-group"><label for="f-notes">What Are You Looking For?</label><textarea id="f-notes" name="notes" placeholder="Tell us about your event, specific shots you want, add-ons you're interested in, etc."></textarea></div>
+      <div id="formError" style="display:none;color:#ff6b6b;font-size:13px;margin-bottom:12px;font-weight:600;"></div>
+      <button type="submit" class="form-submit-btn" id="submitBtn">Send Booking Request →</button>
+    </form>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta">
+  <div class="final-cta-content">
+    <h2>Ready to Lock In Your Coverage?</h2>
+    <p>Premium game day and athlete photography available now. Spots fill fast on weekends.</p>
+    <a href="#booking" class="btn">Book Ontivisions</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <!-- Triple-click this text to open admin panel -->
+  <div class="footer-logo" id="footerLogo">ONTI<span>VISIONS</span></div>
+  <div class="footer-links">
+    <a href="https://instagram.com/ontivisions" target="_blank">@ontivisions</a>
+    <a href="tel:4804165306">(480) 416-5306</a>
+    <a href="mailto:ontivisions@gmail.com">ontivisions@gmail.com</a>
+    <a href="#packages">Packages</a>
+    <a href="#booking">Book Now</a>
+  </div>
+  <p class="footer-copy">© <span id="year"></span> Ontivisions. All rights reserved. Arizona Sports Photography.</p>
+</footer>
+
+<!-- STICKY MOBILE CTA -->
+<div class="sticky-cta" id="stickyCta">
+  <a href="#packages" class="btn btn-outline">Packages</a>
+  <a href="#booking" class="btn btn-primary">Book Now</a>
+</div>
+
+<script>
+  // ─── CHANGE YOUR PASSWORD HERE ───────────────────────────────
+  const ADMIN_PASSWORD = 'Ontivisions1';
+  // ─────────────────────────────────────────────────────────────
+
+  const SPORT_META = {
+    football:   { icon: '🏈', label: 'Football',   bg: 'linear-gradient(135deg,#0d1a2a,#080f18)' },
+    basketball: { icon: '🏀', label: 'Basketball', bg: 'linear-gradient(135deg,#1c0e07,#110806)' },
+    '7v7':      { icon: '🏃', label: '7v7',        bg: 'linear-gradient(135deg,#0a1a0a,#071007)' },
+    softball:   { icon: '🥎', label: 'Softball',   bg: 'linear-gradient(135deg,#1a180a,#100f07)' },
+  };
+
+  // ─── Photo storage ───────────────────────────────────────────
+  function loadPhotos() {
+    try { return JSON.parse(localStorage.getItem('ov_photos') || '[]'); } catch(e) { return []; }
+  }
+  function savePhotos(arr) {
+    localStorage.setItem('ov_photos', JSON.stringify(arr));
+  }
+
+  // ─── Render gallery ──────────────────────────────────────────
+  const PREVIEW_COUNT = 6;
+  let currentFilter = 'all';
+  let lbPhotos = [];
+  let lbIdx = 0;
+
+  function shuffle(arr) {
+    const a = [...arr];
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  }
+
+  const DEFAULT_PHOTOS = [
+    { url: '', sport: 'football',   label: 'Game Day',      featured: true  },
+    { url: '', sport: 'basketball', label: 'Action Shot',   featured: false },
+    { url: '', sport: '7v7',        label: 'Route Running', featured: false },
+    { url: '', sport: 'softball',   label: 'Game Day',      featured: false },
+    { url: '', sport: 'football',   label: 'Sideline',      featured: false },
+    { url: '', sport: 'basketball', label: 'Game Day',      featured: false },
+  ];
+
+  function renderGallery() {
+    const stored = loadPhotos();
+    const photos = stored.length > 0 ? stored : DEFAULT_PHOTOS;
+    const base = currentFilter === 'all' ? photos : photos.filter(p => p.sport === currentFilter);
+    const filtered = currentFilter === 'all' ? (stored.length > 0 ? shuffle(base) : base) : base;
+    const grid = document.getElementById('pfGrid');
+    const more = document.getElementById('pfMore');
+    const expandBtn = document.getElementById('pfExpandBtn');
+
+    grid.innerHTML = '';
+    more.innerHTML = '';
+    more.classList.remove('open');
+    expandBtn.style.display = 'none';
+    expandBtn.textContent = '+ View More Work';
+
+    if (filtered.length === 0) {
+      grid.innerHTML = '<div class="pf-empty"><strong>No Photos Yet</strong>Photos you add will appear here.</div>';
+      lbPhotos = [];
+      return;
+    }
+
+    lbPhotos = filtered;
+    const preview = filtered.slice(0, PREVIEW_COUNT);
+    const rest = filtered.slice(PREVIEW_COUNT);
+
+    preview.forEach((p, i) => {
+      const isFeatured = p.featured && i === 0;
+      grid.appendChild(buildCard(p, filtered.indexOf(p), isFeatured));
     });
 
-    // ─── Scroll reveal ───
-    const revealEls = document.querySelectorAll('.reveal');
-    const revealObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          revealObserver.unobserve(entry.target);
+    if (rest.length > 0) {
+      rest.forEach(p => more.appendChild(buildCard(p, filtered.indexOf(p), false)));
+      expandBtn.style.display = 'inline-block';
+    }
+  }
+
+  function buildCard(photo, globalIdx, isFeatured) {
+    const m = SPORT_META[photo.sport] || SPORT_META.football;
+    const div = document.createElement('div');
+    div.className = 'pf-item' + (isFeatured ? ' big' : '');
+    div.dataset.sport = photo.sport;
+    div.onclick = () => openLB(globalIdx);
+
+    if (photo.url) {
+      div.innerHTML = `<img src="${photo.url}" alt="${m.label}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="pf-placeholder" style="display:none;background:${m.bg}"><div class="pf-placeholder-icon">${m.icon}</div><div class="pf-placeholder-label">${photo.label || m.label}</div></div>`;
+    } else {
+      div.innerHTML = `<div class="pf-placeholder" style="background:${m.bg}"><div class="pf-placeholder-icon">${m.icon}</div><div class="pf-placeholder-label">${photo.label || m.label}</div></div>`;
+    }
+    div.innerHTML += `<div class="pf-overlay"><span class="pf-overlay-sport">${m.label}</span><span class="pf-overlay-cta">View Shot ↗</span></div>`;
+    return div;
+  }
+
+  // ─── Filter ──────────────────────────────────────────────────
+  function filterPortfolio(sport, btn) {
+    currentFilter = sport;
+    document.querySelectorAll('.pf-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderGallery();
+  }
+
+  function toggleMore() {
+    const more = document.getElementById('pfMore');
+    const btn = document.getElementById('pfExpandBtn');
+    const open = more.classList.toggle('open');
+    btn.textContent = open ? '− Show Less' : '+ View More Work';
+  }
+
+  // ─── Lightbox ────────────────────────────────────────────────
+  function openLB(idx) { lbIdx = idx; updateLB(); document.getElementById('lightbox').classList.add('open'); }
+  function closeLB() { document.getElementById('lightbox').classList.remove('open'); }
+  function lbBgClose(e) { if (e.target === document.getElementById('lightbox')) closeLB(); }
+  function navLB(dir) { if (!lbPhotos.length) return; lbIdx = (lbIdx + dir + lbPhotos.length) % lbPhotos.length; updateLB(); }
+  function updateLB() {
+    const p = lbPhotos[lbIdx];
+    if (!p) return;
+    const m = SPORT_META[p.sport] || SPORT_META.football;
+    const wrap = document.getElementById('lbImgWrap');
+    wrap.style.background = m.bg;
+    if (p.url) {
+      wrap.innerHTML = `<img src="${p.url}" alt="${m.label}" style="max-width:100%;max-height:80vh;width:auto;height:auto;object-fit:contain;display:block;" onerror="this.parentElement.innerHTML='<div class=\\'lb-placeholder\\'><div class=\\'lb-placeholder-icon\\'>${m.icon}</div><div class=\\'lb-sport\\'>${m.label}</div></div>'">`;
+    } else {
+      wrap.innerHTML = `<div class="lb-placeholder"><div class="lb-placeholder-icon">${m.icon}</div><div class="lb-sport">${m.label} · ${p.label || ''}</div></div>`;
+    }
+    document.getElementById('lbCounter').textContent = (lbIdx + 1) + ' / ' + lbPhotos.length;
+  }
+
+  // ─── Admin panel ─────────────────────────────────────────────
+  let logoClicks = 0;
+  let logoClickTimer;
+
+  document.getElementById('footerLogo').addEventListener('click', () => {
+    logoClicks++;
+    clearTimeout(logoClickTimer);
+    logoClickTimer = setTimeout(() => logoClicks = 0, 800);
+    if (logoClicks >= 3) { logoClicks = 0; openAdmin(); }
+  });
+
+  function openAdmin() {
+    document.getElementById('adminOverlay').classList.add('open');
+    document.getElementById('adminPanel').classList.remove('open');
+    document.getElementById('adminPwModal').style.display = '';
+    document.getElementById('adminPwInput').value = '';
+    document.getElementById('adminPwError').style.display = 'none';
+    setTimeout(() => document.getElementById('adminPwInput').focus(), 100);
+  }
+
+  function closeAdmin() {
+    document.getElementById('adminOverlay').classList.remove('open');
+    document.getElementById('adminPanel').classList.remove('open');
+    document.getElementById('adminPwModal').style.display = '';
+  }
+
+  function checkPw() {
+    const val = document.getElementById('adminPwInput').value;
+    if (val === ADMIN_PASSWORD) {
+      showAdminPanel();
+    } else {
+      document.getElementById('adminPwError').style.display = 'block';
+      document.getElementById('adminPwInput').value = '';
+      document.getElementById('adminPwInput').focus();
+    }
+  }
+
+  function showAdminPanel() {
+    document.getElementById('adminPwModal').style.display = 'none';
+    document.getElementById('adminPanel').classList.add('open');
+    renderAdminList();
+  }
+
+  function renderAdminList() {
+    const photos = loadPhotos();
+    const list = document.getElementById('adminPhotoItems');
+    document.getElementById('photoListLabel').textContent = `Current Photos (${photos.length})`;
+    if (photos.length === 0) {
+      list.innerHTML = '<div class="admin-empty-list">No photos added yet. Add your first photo above.</div>';
+      return;
+    }
+    list.innerHTML = '';
+    photos.forEach((p, i) => {
+      const m = SPORT_META[p.sport] || SPORT_META.football;
+      const item = document.createElement('div');
+      item.className = 'admin-photo-item';
+      item.innerHTML = `
+        ${p.url
+          ? `<img class="admin-thumb" src="${p.url}" alt="" onerror="this.style.display='none'">`
+          : `<div class="admin-thumb-placeholder">${m.icon}</div>`}
+        <div class="admin-photo-info">
+          <div class="admin-photo-sport">${m.label}${p.featured ? ' &nbsp;<span class="admin-featured-badge">Featured</span>' : ''}</div>
+          <div class="admin-photo-url">${p.url || 'No URL — placeholder'}</div>
+          ${p.label ? `<div style="font-size:11px;color:rgba(240,240,240,0.35);margin-top:2px;">${p.label}</div>` : ''}
+        </div>
+        <button class="admin-delete-btn" onclick="deletePhoto(${i})">Delete</button>`;
+      list.appendChild(item);
+    });
+  }
+
+  // ─── Tab switching ────────────────────────────────────────────
+  let activeTab = 'upload';
+  function switchTab(tab) {
+    activeTab = tab;
+    document.getElementById('panelUpload').style.display = tab === 'upload' ? '' : 'none';
+    document.getElementById('panelUrl').style.display = tab === 'url' ? '' : 'none';
+    document.getElementById('tabUpload').style.background = tab === 'upload' ? 'var(--blue)' : '#1e1e1e';
+    document.getElementById('tabUpload').style.color = tab === 'upload' ? '#fff' : 'rgba(240,240,240,0.5)';
+    document.getElementById('tabUrl').style.background = tab === 'url' ? 'var(--blue)' : '#1e1e1e';
+    document.getElementById('tabUrl').style.color = tab === 'url' ? '#fff' : 'rgba(240,240,240,0.5)';
+    pendingFiles = [];
+    document.getElementById('uploadPreview').style.display = 'none';
+    document.getElementById('uploadPreviewItems').innerHTML = '';
+  }
+
+  // ─── File upload ──────────────────────────────────────────────
+  let pendingFiles = []; // { dataUrl, name }
+
+  const dropZone = document.getElementById('dropZone');
+  dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.style.borderColor = 'var(--blue)'; dropZone.style.background = 'rgba(26,140,255,0.06)'; });
+  dropZone.addEventListener('dragleave', () => { dropZone.style.borderColor = ''; dropZone.style.background = ''; });
+  dropZone.addEventListener('drop', e => { e.preventDefault(); dropZone.style.borderColor = ''; dropZone.style.background = ''; handleFiles(e.dataTransfer.files); });
+
+  function handleFiles(files) {
+    if (!files || !files.length) return;
+    pendingFiles = [];
+    document.getElementById('uploadPreviewItems').innerHTML = '';
+    document.getElementById('uploadPreview').style.display = 'none';
+
+    const arr = Array.from(files).filter(f => f.type.startsWith('image/'));
+    if (!arr.length) { alert('Please select image files (JPG, PNG, etc.)'); return; }
+
+    const progress = document.getElementById('uploadProgress');
+    const bar = document.getElementById('uploadProgressBar');
+    const txt = document.getElementById('uploadProgressText');
+    progress.style.display = 'block';
+    bar.style.width = '0%';
+    txt.textContent = `Processing 1 of ${arr.length}…`;
+
+    // Process sequentially so browser doesn't freeze
+    function processNext(i) {
+      if (i >= arr.length) {
+        progress.style.display = 'none';
+        bar.style.width = '0%';
+        document.getElementById('uploadPreview').style.display = 'block';
+        return;
+      }
+      txt.textContent = `Compressing ${i + 1} of ${arr.length}…`;
+      bar.style.width = ((i + 1) / arr.length * 100) + '%';
+
+      // Use setTimeout so the UI updates between each file
+      setTimeout(() => {
+        compressImage(arr[i], 1100, 0.75, dataUrl => {
+          pendingFiles.push({ dataUrl, name: arr[i].name });
+          const thumb = document.createElement('div');
+          thumb.style.cssText = 'position:relative;width:72px;height:54px;border-radius:4px;overflow:hidden;border:1px solid rgba(255,255,255,0.12);flex-shrink:0;';
+          thumb.innerHTML = `<img src="${dataUrl}" style="width:100%;height:100%;object-fit:cover;">
+            <div style="position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,0.6);font-size:8px;text-align:center;padding:2px;color:rgba(255,255,255,0.7);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${arr[i].name.replace(/\.[^.]+$/,'')}</div>`;
+          document.getElementById('uploadPreviewItems').appendChild(thumb);
+          processNext(i + 1);
+        });
+      }, 50);
+    }
+    processNext(0);
+  }
+
+  function compressImage(file, maxPx, quality, cb) {
+    const reader = new FileReader();
+    reader.onerror = () => cb('');
+    reader.onload = e => {
+      const img = new Image();
+      img.onerror = () => cb('');
+      img.onload = () => {
+        let w = img.width, h = img.height;
+        if (w > maxPx || h > maxPx) {
+          if (w > h) { h = Math.round(h * maxPx / w); w = maxPx; }
+          else { w = Math.round(w * maxPx / h); h = maxPx; }
         }
-      });
-    }, { threshold: 0.12 });
-    revealEls.forEach(el => revealObserver.observe(el));
+        const canvas = document.createElement('canvas');
+        canvas.width = w; canvas.height = h;
+        canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+        cb(canvas.toDataURL('image/jpeg', quality));
+      };
+      img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  }
 
-    // ─── Netlify Forms submission ───
-    // Netlify detects the data-netlify="true" attribute at deploy time
-    // and handles all form storage + email notifications automatically.
-    // To set your notification email:
-    //   Netlify Dashboard → Forms → ontivisions-booking → Settings → Email notifications
-    //   Add: ontivisions@gmail.com
+  // ─── Add photo ────────────────────────────────────────────────
+  function addPhoto() {
+    const sport = document.getElementById('newPhotoSport').value;
+    const label = document.getElementById('newPhotoLabel').value.trim();
+    const featured = document.getElementById('newPhotoFeatured').checked;
+    const photos = loadPhotos();
 
-    const form     = document.getElementById('bookingForm');
-    const success  = document.getElementById('formSuccess');
-    const errBox   = document.getElementById('formError');
-    const submitBtn = document.getElementById('submitBtn');
+    if (activeTab === 'upload') {
+      if (!pendingFiles.length) { alert('Please select at least one photo first.'); return; }
 
-    form.addEventListener('submit', function(e) {
-      e.preventDefault();
-      errBox.style.display = 'none';
+      const progress = document.getElementById('uploadProgress');
+      const bar = document.getElementById('uploadProgressBar');
+      const txt = document.getElementById('uploadProgressText');
+      progress.style.display = 'block';
+      txt.textContent = 'Saving…';
+      bar.style.width = '80%';
 
-      // Validate required fields
-      const requiredIds = ['f-name', 'f-email', 'f-sport', 'f-package'];
-      let valid = true;
-      requiredIds.forEach(id => {
-        const el = document.getElementById(id);
-        if (!el.value.trim()) {
-          valid = false;
-          el.style.borderColor = '#ff4d4d';
-          el.addEventListener('input', () => el.style.borderColor = '', { once: true });
-        }
-      });
-      if (!valid) {
-        errBox.textContent = 'Please fill in all required fields.';
-        errBox.style.display = 'block';
+      try {
+        pendingFiles.forEach((f, i) => {
+          if (!f.dataUrl) return;
+          const isFirst = i === 0 && featured;
+          const photo = { url: f.dataUrl, sport, label: label || '', featured: isFirst };
+          if (isFirst) photos.unshift(photo); else photos.push(photo);
+        });
+        savePhotos(photos);
+        bar.style.width = '100%';
+        txt.textContent = 'Saved!';
+      } catch(e) {
+        progress.style.display = 'none';
+        alert('Storage is full. Try uploading fewer photos at once, or delete some existing ones first.');
         return;
       }
 
-      submitBtn.disabled = true;
-      submitBtn.textContent = 'Sending…';
+      setTimeout(() => {
+        progress.style.display = 'none';
+        bar.style.width = '0%';
+        pendingFiles = [];
+        document.getElementById('uploadPreview').style.display = 'none';
+        document.getElementById('uploadPreviewItems').innerHTML = '';
+        document.getElementById('newPhotoLabel').value = '';
+        document.getElementById('newPhotoFeatured').checked = false;
+        renderAdminList();
+        renderGallery();
+      }, 500);
 
-      // Submit to Netlify via fetch (keeps user on page, shows success message)
-      const data = new FormData(form);
-      fetch('/', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams(data).toString()
-      })
-      .then(() => {
-        form.style.display = 'none';
-        success.classList.add('show');
-        success.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      })
-      .catch(() => {
-        errBox.textContent = 'Something went wrong. Please try again or email us directly.';
-        errBox.style.display = 'block';
-        submitBtn.disabled = false;
-        submitBtn.textContent = 'Send Booking Request →';
-      });
+    } else {
+      const url = document.getElementById('newPhotoUrl').value.trim();
+      if (!url) { alert('Please enter an image URL.'); return; }
+      const photo = { url, sport, label, featured };
+      if (featured) photos.unshift(photo); else photos.push(photo);
+      savePhotos(photos);
+      document.getElementById('newPhotoUrl').value = '';
+      document.getElementById('newPhotoLabel').value = '';
+      document.getElementById('newPhotoFeatured').checked = false;
+      renderAdminList();
+      renderGallery();
+    }
+  }
+
+  function deletePhoto(idx) {
+    if (!confirm('Remove this photo from the portfolio?')) return;
+    const photos = loadPhotos();
+    photos.splice(idx, 1);
+    savePhotos(photos);
+    renderAdminList();
+    renderGallery();
+  }
+
+  // ─── Booking form ────────────────────────────────────────────
+  const form = document.getElementById('bookingForm');
+  const success = document.getElementById('formSuccess');
+  const errBox = document.getElementById('formError');
+  const submitBtn = document.getElementById('submitBtn');
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    errBox.style.display = 'none';
+    const required = ['f-name','f-email','f-sport','f-package'];
+    let valid = true;
+    required.forEach(id => {
+      const el = document.getElementById(id);
+      if (!el.value.trim()) { valid = false; el.style.borderColor = '#ff4d4d'; el.addEventListener('input', () => el.style.borderColor = '', { once: true }); }
     });
+    if (!valid) { errBox.textContent = 'Please fill in all required fields.'; errBox.style.display = 'block'; return; }
+    submitBtn.disabled = true; submitBtn.textContent = 'Sending…';
+    fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: new URLSearchParams(new FormData(form)).toString() })
+      .then(() => { form.style.display = 'none'; success.classList.add('show'); success.scrollIntoView({ behavior: 'smooth', block: 'center' }); })
+      .catch(() => { errBox.textContent = 'Something went wrong. Please email us directly.'; errBox.style.display = 'block'; submitBtn.disabled = false; submitBtn.textContent = 'Send Booking Request →'; });
+  });
 
-    // ─── Hide sticky CTA near the booking form ───
-    const stickyCta = document.getElementById('stickyCta');
-    const bookingSection = document.getElementById('booking');
-    const stickyObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        stickyCta.style.opacity = entry.isIntersecting ? '0' : '1';
-        stickyCta.style.pointerEvents = entry.isIntersecting ? 'none' : 'auto';
-      });
-    }, { threshold: 0.1 });
-    stickyObserver.observe(bookingSection);
-  </script>
+  // ─── Misc ─────────────────────────────────────────────────────
+  document.getElementById('year').textContent = new Date().getFullYear();
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 50));
+  const revealEls = document.querySelectorAll('.reveal');
+  const revealObs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  revealEls.forEach(el => revealObs.observe(el));
+  const stickyCta = document.getElementById('stickyCta');
+  new IntersectionObserver(entries => {
+    entries.forEach(e => { stickyCta.style.opacity = e.isIntersecting ? '0' : '1'; stickyCta.style.pointerEvents = e.isIntersecting ? 'none' : 'auto'; });
+  }, { threshold: 0.1 }).observe(document.getElementById('booking'));
 
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') { closeLB(); closeAdmin(); }
+    if (e.key === 'ArrowRight' && document.getElementById('lightbox').classList.contains('open')) navLB(1);
+    if (e.key === 'ArrowLeft' && document.getElementById('lightbox').classList.contains('open')) navLB(-1);
+  });
+
+  // ─── Init ─────────────────────────────────────────────────────
+  renderGallery();
+</script>
 </body>
 </html>
