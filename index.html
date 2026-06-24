@@ -310,8 +310,8 @@
 <!-- LIGHTBOX -->
 <div class="lightbox" id="lightbox" onclick="lbBgClose(event)">
   <button class="lb-close" onclick="closeLB()">✕</button>
-  <div class="lb-img-wrap" id="lbImgWrap" style="background: linear-gradient(135deg, rgb(26, 24, 10), rgb(16, 15, 7));"><img src="./index_files/DSC_4252.jpg" alt="Softball" style="max-width:100%;max-height:80vh;width:auto;height:auto;object-fit:contain;display:block;" onerror="this.parentElement.innerHTML=&#39;&lt;div class=\&#39;lb-placeholder\&#39;&gt;&lt;div class=\&#39;lb-placeholder-icon\&#39;&gt;🥎&lt;/div&gt;&lt;div class=\&#39;lb-sport\&#39;&gt;Softball&lt;/div&gt;&lt;/div&gt;&#39;"></div>
-  <div class="lb-counter" id="lbCounter">3 / 7</div>
+  <div class="lb-img-wrap" id="lbImgWrap"></div>
+  <div class="lb-counter" id="lbCounter"></div>
   <div class="lb-nav">
     <button onclick="navLB(-1)">← Prev</button>
     <button onclick="navLB(1)">Next →</button>
@@ -431,22 +431,22 @@
     <strong>Ontivisions creates professional, high-energy sports photography</strong> for athletes, teams, coaches, and parents across Arizona. From game day action to media days and private athlete sessions — we deliver gallery-quality images that showcase your best moments. Football, basketball, 7v7, softball, and more.
   </p>
   <div class="stat-strip">
-    <div class="stat reveal reveal-delay-2 visible"><div class="stat-num">48H</div><div class="stat-label">Turnaround</div></div>
-    <div class="stat reveal reveal-delay-3 visible"><div class="stat-num">HD</div><div class="stat-label">Digital Delivery</div></div>
-    <div class="stat reveal reveal-delay-4 visible"><div class="stat-num">5+</div><div class="stat-label">Sports Covered</div></div>
-    <div class="stat reveal reveal-delay-5 visible"><div class="stat-num">AZ</div><div class="stat-label">Based &amp; Ready</div></div>
+    <div class="stat reveal reveal-delay-2"><div class="stat-num">48H</div><div class="stat-label">Turnaround</div></div>
+    <div class="stat reveal reveal-delay-3"><div class="stat-num">HD</div><div class="stat-label">Digital Delivery</div></div>
+    <div class="stat reveal reveal-delay-4"><div class="stat-num">5+</div><div class="stat-label">Sports Covered</div></div>
+    <div class="stat reveal reveal-delay-5"><div class="stat-num">AZ</div><div class="stat-label">Based &amp; Ready</div></div>
   </div>
 </section>
 
 <!-- PACKAGES -->
 <section class="packages" id="packages">
-  <div class="section-header reveal visible">
+  <div class="section-header reveal">
     <span class="eyebrow">Coverage Options</span>
     <h2>Packages</h2>
     <p>Choose the level of coverage that fits your program, team, or athlete.</p>
   </div>
   <div class="packages-grid container">
-    <div class="pkg-card reveal reveal-delay-1 visible">
+    <div class="pkg-card reveal reveal-delay-1">
       <div class="pkg-body">
         <div class="pkg-badge">Individual</div>
         <div class="pkg-name">Private Athlete Session</div>
@@ -457,7 +457,7 @@
         <div class="pkg-price">$250</div>
       </div>
     </div>
-    <div class="pkg-card featured reveal reveal-delay-2 visible">
+    <div class="pkg-card featured reveal reveal-delay-2">
       <div class="pkg-body">
         <div class="pkg-badge">Live Action</div>
         <div class="pkg-name">Game Day Coverage</div>
@@ -468,7 +468,7 @@
         <div class="pkg-price">$600</div>
       </div>
     </div>
-    <div class="pkg-card reveal reveal-delay-3 visible">
+    <div class="pkg-card reveal reveal-delay-3">
       <div class="pkg-body">
         <div class="pkg-badge">Full Team</div>
         <div class="pkg-name">Team Media Day</div>
@@ -479,7 +479,7 @@
         <div class="pkg-price">$500</div>
       </div>
     </div>
-    <div class="pkg-card reveal reveal-delay-4 visible">
+    <div class="pkg-card reveal reveal-delay-4">
       <div class="pkg-body">
         <div class="pkg-badge">Season Package</div>
         <div class="pkg-name">Full Program Coverage</div>
@@ -495,23 +495,23 @@
 
 <!-- ADD-ONS -->
 <section class="addons" id="addons">
-  <div class="section-header reveal visible">
+  <div class="section-header reveal">
     <span class="eyebrow">Level Up</span>
     <h2>Add-Ons</h2>
     <p>Customize your package with extras that get you more mileage from every shoot.</p>
   </div>
   <div class="addons-grid container">
-    <div class="addon-chip reveal reveal-delay-1 visible">
+    <div class="addon-chip reveal reveal-delay-1">
       <div class="addon-chip-icon">⚡</div>
       <div class="addon-chip-name">Rush Delivery</div>
       <div class="addon-chip-desc">Same-day or next-day gallery turnaround for time-sensitive events.</div>
     </div>
-    <div class="addon-chip reveal reveal-delay-2 visible">
+    <div class="addon-chip reveal reveal-delay-2">
       <div class="addon-chip-icon">📱</div>
       <div class="addon-chip-name">Social Media Graphics</div>
       <div class="addon-chip-desc">Branded graphics and overlays formatted for posts and stories.</div>
     </div>
-    <div class="addon-chip reveal reveal-delay-3 visible">
+    <div class="addon-chip reveal reveal-delay-3">
       <div class="addon-chip-icon">🖼️</div>
       <div class="addon-chip-name">Full Team Gallery</div>
       <div class="addon-chip-desc">Private online gallery shared with the entire team and parents.</div>
@@ -521,12 +521,12 @@
 
 <!-- BOOKING -->
 <section class="booking" id="booking">
-  <div class="section-header reveal visible">
+  <div class="section-header reveal">
     <span class="eyebrow">Get Covered</span>
     <h2>Book Your Session</h2>
     <p>Fill out the form and we'll reach out within 24 hours to confirm your date.</p>
   </div>
-  <div class="form-wrapper reveal visible">
+  <div class="form-wrapper reveal">
     <div class="form-success" id="formSuccess">
       <div class="form-success-icon">✅</div>
       <h3>Request Sent!</h3>
@@ -598,7 +598,7 @@
 </footer>
 
 <!-- STICKY MOBILE CTA -->
-<div class="sticky-cta" id="stickyCta" style="opacity: 0; pointer-events: none;">
+<div class="sticky-cta" id="stickyCta" style="opacity: 1; pointer-events: auto;">
   <a href="file:///Users/ethanontiveros/Claude/Ontivisions/index.html#packages" class="btn btn-outline">Packages</a>
   <a href="file:///Users/ethanontiveros/Claude/Ontivisions/index.html#booking" class="btn btn-primary">Book Now</a>
 </div>
@@ -615,13 +615,9 @@
     softball:   { icon: '🥎', label: 'Softball',      bg: 'linear-gradient(135deg,#1a180a,#100f07)' },
   };
 
-  // Cloudinary URL optimizer — fast thumbnails for grid, full-res for lightbox
-  function clThumb(url) {
-    return url.replace('/upload/', '/upload/f_auto,q_auto,w_800,c_fill,g_auto/');
-  }
-  function clFull(url) {
-    return url.replace('/upload/', '/upload/f_auto,q_auto,w_1600/');
-  }
+  // Cloudinary URL — serve as-is (direct URL, no transformations needed)
+  function clThumb(url) { return url; }
+  function clFull(url)  { return url; }
 
   // ─── Photo storage ───────────────────────────────────────────
   function loadPhotos() {
