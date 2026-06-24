@@ -289,7 +289,7 @@
     <button class="pf-btn" onclick="filterPortfolio(&#39;all&#39;,this)">All</button>
     <button class="pf-btn" onclick="filterPortfolio(&#39;football&#39;,this)">Football</button>
     <button class="pf-btn" onclick="filterPortfolio(&#39;basketball&#39;,this)">Basketball</button>
-    <button class="pf-btn" onclick="filterPortfolio(&#39;7v7&#39;,this)">7v7</button>
+    <button class="pf-btn" onclick="filterPortfolio(&#39;flag&#39;,this)">Flag Football</button>
     <button class="pf-btn active" onclick="filterPortfolio(&#39;softball&#39;,this)">Softball</button>
   </div>
   <div class="portfolio-grid reveal reveal-delay-2 visible" id="pfGrid"><div class="pf-item" data-sport="softball"><img src="./index_files/Copy of DSC_4096.jpg" alt="Softball" loading="lazy" onerror="this.style.display=&#39;none&#39;;this.nextElementSibling.style.display=&#39;flex&#39;">
@@ -310,8 +310,8 @@
 <!-- LIGHTBOX -->
 <div class="lightbox" id="lightbox" onclick="lbBgClose(event)">
   <button class="lb-close" onclick="closeLB()">✕</button>
-  <div class="lb-img-wrap" id="lbImgWrap" style="background: linear-gradient(135deg, rgb(26, 24, 10), rgb(16, 15, 7));"><img src="./index_files/Copy of DSC_4815.jpg" alt="Softball" style="max-width:100%;max-height:80vh;width:auto;height:auto;object-fit:contain;display:block;" onerror="this.parentElement.innerHTML=&#39;&lt;div class=\&#39;lb-placeholder\&#39;&gt;&lt;div class=\&#39;lb-placeholder-icon\&#39;&gt;🥎&lt;/div&gt;&lt;div class=\&#39;lb-sport\&#39;&gt;Softball&lt;/div&gt;&lt;/div&gt;&#39;"></div>
-  <div class="lb-counter" id="lbCounter">2 / 7</div>
+  <div class="lb-img-wrap" id="lbImgWrap" style="background: linear-gradient(135deg, rgb(26, 24, 10), rgb(16, 15, 7));"><img src="./index_files/DSC_4252.jpg" alt="Softball" style="max-width:100%;max-height:80vh;width:auto;height:auto;object-fit:contain;display:block;" onerror="this.parentElement.innerHTML=&#39;&lt;div class=\&#39;lb-placeholder\&#39;&gt;&lt;div class=\&#39;lb-placeholder-icon\&#39;&gt;🥎&lt;/div&gt;&lt;div class=\&#39;lb-sport\&#39;&gt;Softball&lt;/div&gt;&lt;/div&gt;&#39;"></div>
+  <div class="lb-counter" id="lbCounter">3 / 7</div>
   <div class="lb-nav">
     <button onclick="navLB(-1)">← Prev</button>
     <button onclick="navLB(1)">Next →</button>
@@ -322,11 +322,11 @@
 <div class="admin-overlay" id="adminOverlay">
 
   <!-- Password gate -->
-  <div class="admin-pw-modal" id="adminPwModal" style="">
+  <div class="admin-pw-modal" id="adminPwModal">
     <h3>Admin Access</h3>
     <p>Enter your password to manage portfolio photos.</p>
     <input type="password" class="admin-pw-input" id="adminPwInput" placeholder="Password" onkeydown="if(event.key===&#39;Enter&#39;)checkPw()">
-    <div class="admin-pw-error" id="adminPwError" style="display: block;">Incorrect password. Try again.</div>
+    <div class="admin-pw-error" id="adminPwError">Incorrect password. Try again.</div>
     <button class="admin-pw-btn" onclick="checkPw()">Enter</button>
     <span class="admin-pw-cancel" onclick="closeAdmin()">Cancel</span>
   </div>
@@ -352,12 +352,12 @@
 
         <!-- Upload tabs -->
         <div style="display:flex;gap:0;margin-bottom:18px;border:1px solid rgba(255,255,255,0.1);border-radius:4px;overflow:hidden;">
-          <button id="tabUpload" onclick="switchTab(&#39;upload&#39;)" style="flex: 1 1 0%; padding: 9px; font-family: Inter, sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; cursor: pointer; background: rgb(30, 30, 30); color: rgba(240, 240, 240, 0.5); transition: 0.2s;">📁 Upload from Device</button>
-          <button id="tabUrl" onclick="switchTab(&#39;url&#39;)" style="flex: 1 1 0%; padding: 9px; font-family: Inter, sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; cursor: pointer; background: var(--blue); color: rgb(255, 255, 255); transition: 0.2s;">🔗 Paste URL</button>
+          <button id="tabUpload" onclick="switchTab(&#39;upload&#39;)" style="flex:1;padding:9px;font-family:&#39;Inter&#39;,sans-serif;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;border:none;cursor:pointer;background:var(--blue);color:#fff;transition:all .2s;">📁 Upload from Device</button>
+          <button id="tabUrl" onclick="switchTab(&#39;url&#39;)" style="flex:1;padding:9px;font-family:&#39;Inter&#39;,sans-serif;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;border:none;cursor:pointer;background:#1e1e1e;color:rgba(240,240,240,0.5);transition:all .2s;">🔗 Paste URL</button>
         </div>
 
         <!-- Upload from device -->
-        <div id="panelUpload" style="display: none;">
+        <div id="panelUpload">
           <div id="dropZone" onclick="document.getElementById(&#39;fileInput&#39;).click()" style="border:2px dashed rgba(26,140,255,0.35);border-radius:6px;padding:32px 20px;text-align:center;cursor:pointer;transition:border-color .2s,background .2s;margin-bottom:14px;">
             <div style="font-size:28px;margin-bottom:8px;">📸</div>
             <div style="font-size:13px;font-weight:700;color:var(--white);margin-bottom:4px;">Click to choose photos</div>
@@ -371,7 +371,7 @@
         </div>
 
         <!-- Paste URL -->
-        <div id="panelUrl" style="">
+        <div id="panelUrl" style="display:none;">
           <div class="admin-field">
             <label>Image URL — paste Google Drive, Dropbox, or any direct image link</label>
             <input type="url" id="newPhotoUrl" placeholder="https://drive.google.com/file/d/..." oninput="previewUrl(this.value)">
@@ -415,183 +415,8 @@
 
       <!-- Current photo list -->
       <div class="admin-photo-list">
-        <h4 id="photoListLabel">Current Photos (25)</h4>
-        <div class="admin-photo-items" id="adminPhotoItems"><div class="admin-photo-item">
-        <img class="admin-thumb" src="./index_files/DSC_2619.jpg" alt="" onerror="this.style.display=&#39;none&#39;">
-        <div class="admin-photo-info">
-          <div class="admin-photo-sport">Football</div>
-          <div class="admin-photo-url">https://lh3.googleusercontent.com/d/1sXRfBkbXytKKxxni4yEMLD9V8wbtdWdR</div>
-          
-        </div>
-        <button class="admin-delete-btn" onclick="deletePhoto(0)">Delete</button></div><div class="admin-photo-item">
-        <img class="admin-thumb" src="./index_files/DSC_3702 copy.jpg" alt="" onerror="this.style.display=&#39;none&#39;">
-        <div class="admin-photo-info">
-          <div class="admin-photo-sport">Football</div>
-          <div class="admin-photo-url">https://lh3.googleusercontent.com/d/1CJ8bhwDuFc_6omcZtgvcJwiHK2ecFs7K</div>
-          
-        </div>
-        <button class="admin-delete-btn" onclick="deletePhoto(1)">Delete</button></div><div class="admin-photo-item">
-        <img class="admin-thumb" src="./index_files/DSC_4143 copy.jpg" alt="" onerror="this.style.display=&#39;none&#39;">
-        <div class="admin-photo-info">
-          <div class="admin-photo-sport">Football</div>
-          <div class="admin-photo-url">https://lh3.googleusercontent.com/d/1EPDmDgiGkB5sGhzdMjssOAHXSHUj3SZt</div>
-          
-        </div>
-        <button class="admin-delete-btn" onclick="deletePhoto(2)">Delete</button></div><div class="admin-photo-item">
-        <img class="admin-thumb" src="./index_files/DSC_4368.jpg" alt="" onerror="this.style.display=&#39;none&#39;">
-        <div class="admin-photo-info">
-          <div class="admin-photo-sport">Football</div>
-          <div class="admin-photo-url">https://lh3.googleusercontent.com/d/16egzd5jC-jVUwHNBvPN_bN_sMPpHa9Bu</div>
-          
-        </div>
-        <button class="admin-delete-btn" onclick="deletePhoto(3)">Delete</button></div><div class="admin-photo-item">
-        <img class="admin-thumb" src="./index_files/DSC_6735.jpg" alt="" onerror="this.style.display=&#39;none&#39;">
-        <div class="admin-photo-info">
-          <div class="admin-photo-sport">Football</div>
-          <div class="admin-photo-url">https://lh3.googleusercontent.com/d/1udgzBYvz83zM4A5BK3N5VZZfw6U36oGz</div>
-          
-        </div>
-        <button class="admin-delete-btn" onclick="deletePhoto(4)">Delete</button></div><div class="admin-photo-item">
-        <img class="admin-thumb" src="./index_files/DSC_7136.jpg" alt="" onerror="this.style.display=&#39;none&#39;">
-        <div class="admin-photo-info">
-          <div class="admin-photo-sport">Football</div>
-          <div class="admin-photo-url">https://lh3.googleusercontent.com/d/15iSCy5mjZiywW7QNSeD0pmEdHUGwtK8w</div>
-          
-        </div>
-        <button class="admin-delete-btn" onclick="deletePhoto(5)">Delete</button></div><div class="admin-photo-item">
-        <img class="admin-thumb" src="./index_files/DSC_1274.jpg" alt="" onerror="this.style.display=&#39;none&#39;">
-        <div class="admin-photo-info">
-          <div class="admin-photo-sport">7v7</div>
-          <div class="admin-photo-url">https://lh3.googleusercontent.com/d/12EZzuaLilCZjqav8H3aQaUl6AkEB3ftY</div>
-          
-        </div>
-        <button class="admin-delete-btn" onclick="deletePhoto(6)">Delete</button></div><div class="admin-photo-item">
-        <img class="admin-thumb" src="./index_files/DSC_2002.jpg" alt="" onerror="this.style.display=&#39;none&#39;">
-        <div class="admin-photo-info">
-          <div class="admin-photo-sport">7v7</div>
-          <div class="admin-photo-url">https://lh3.googleusercontent.com/d/1eZzG81fqy4Dh1jg1i7RpoGYBiQDEU7Ck</div>
-          
-        </div>
-        <button class="admin-delete-btn" onclick="deletePhoto(7)">Delete</button></div><div class="admin-photo-item">
-        <img class="admin-thumb" src="./index_files/DSC_2477.jpg" alt="" onerror="this.style.display=&#39;none&#39;">
-        <div class="admin-photo-info">
-          <div class="admin-photo-sport">7v7</div>
-          <div class="admin-photo-url">https://lh3.googleusercontent.com/d/1Fj3bq6tQ3ReqelfKL83_Gv04QuR_-cKw</div>
-          
-        </div>
-        <button class="admin-delete-btn" onclick="deletePhoto(8)">Delete</button></div><div class="admin-photo-item">
-        <img class="admin-thumb" src="./index_files/DSC_2508.jpg" alt="" onerror="this.style.display=&#39;none&#39;">
-        <div class="admin-photo-info">
-          <div class="admin-photo-sport">7v7</div>
-          <div class="admin-photo-url">https://lh3.googleusercontent.com/d/1DjnrjNQLVso39Ho7OO15b92_EzaRBhY2</div>
-          
-        </div>
-        <button class="admin-delete-btn" onclick="deletePhoto(9)">Delete</button></div><div class="admin-photo-item">
-        <img class="admin-thumb" src="./index_files/DSC_3860.jpg" alt="" onerror="this.style.display=&#39;none&#39;">
-        <div class="admin-photo-info">
-          <div class="admin-photo-sport">7v7</div>
-          <div class="admin-photo-url">https://lh3.googleusercontent.com/d/1GIMEyRq5D8ljhzWSPrwfpGKf8SFenv3Q</div>
-          
-        </div>
-        <button class="admin-delete-btn" onclick="deletePhoto(10)">Delete</button></div><div class="admin-photo-item">
-        <img class="admin-thumb" src="./index_files/DSC_6483.jpg" alt="" onerror="this.style.display=&#39;none&#39;">
-        <div class="admin-photo-info">
-          <div class="admin-photo-sport">7v7</div>
-          <div class="admin-photo-url">https://lh3.googleusercontent.com/d/1wVcM1trBVz_Txo10gWoUMR5guIBC5_DP</div>
-          
-        </div>
-        <button class="admin-delete-btn" onclick="deletePhoto(11)">Delete</button></div><div class="admin-photo-item">
-        <img class="admin-thumb" src="./index_files/Copy of DSC_2834.jpg" alt="" onerror="this.style.display=&#39;none&#39;">
-        <div class="admin-photo-info">
-          <div class="admin-photo-sport">Basketball</div>
-          <div class="admin-photo-url">https://lh3.googleusercontent.com/d/1E0_Qy1j5B-w20bbZ_NFqI3XKvmcFfS45</div>
-          
-        </div>
-        <button class="admin-delete-btn" onclick="deletePhoto(12)">Delete</button></div><div class="admin-photo-item">
-        <img class="admin-thumb" src="./index_files/Copy of DSC_8426.jpg" alt="" onerror="this.style.display=&#39;none&#39;">
-        <div class="admin-photo-info">
-          <div class="admin-photo-sport">Basketball</div>
-          <div class="admin-photo-url">https://lh3.googleusercontent.com/d/1rpVCQDkQZpFFV-QU43VYtC0Z_zJwv0hb</div>
-          
-        </div>
-        <button class="admin-delete-btn" onclick="deletePhoto(13)">Delete</button></div><div class="admin-photo-item">
-        <img class="admin-thumb" src="./index_files/Copy of DSC_8591.jpg" alt="" onerror="this.style.display=&#39;none&#39;">
-        <div class="admin-photo-info">
-          <div class="admin-photo-sport">Basketball</div>
-          <div class="admin-photo-url">https://lh3.googleusercontent.com/d/13PX0Ojnz-5s2VB_7MEN99SArpi-IKnpP</div>
-          
-        </div>
-        <button class="admin-delete-btn" onclick="deletePhoto(14)">Delete</button></div><div class="admin-photo-item">
-        <img class="admin-thumb" src="./index_files/Copy of DSC_9051_1.jpg" alt="" onerror="this.style.display=&#39;none&#39;">
-        <div class="admin-photo-info">
-          <div class="admin-photo-sport">Basketball</div>
-          <div class="admin-photo-url">https://lh3.googleusercontent.com/d/1Iqa9pj9xkqaj6IVjvj9bgulXLSc_UGCJ</div>
-          
-        </div>
-        <button class="admin-delete-btn" onclick="deletePhoto(15)">Delete</button></div><div class="admin-photo-item">
-        <img class="admin-thumb" src="./index_files/DSC_7625.jpg" alt="" onerror="this.style.display=&#39;none&#39;">
-        <div class="admin-photo-info">
-          <div class="admin-photo-sport">Basketball</div>
-          <div class="admin-photo-url">https://lh3.googleusercontent.com/d/1Nc8h0PNZvj9WIZQZWKazdo1ua0I209_F</div>
-          
-        </div>
-        <button class="admin-delete-btn" onclick="deletePhoto(16)">Delete</button></div><div class="admin-photo-item">
-        <img class="admin-thumb" src="./index_files/DSC_7965.jpg" alt="" onerror="this.style.display=&#39;none&#39;">
-        <div class="admin-photo-info">
-          <div class="admin-photo-sport">Basketball</div>
-          <div class="admin-photo-url">https://lh3.googleusercontent.com/d/1r7kHpM7SvTMm9baxjMRmnho0oyBroQuy</div>
-          
-        </div>
-        <button class="admin-delete-btn" onclick="deletePhoto(17)">Delete</button></div><div class="admin-photo-item">
-        <img class="admin-thumb" src="./index_files/Copy of DSC_4096.jpg" alt="" onerror="this.style.display=&#39;none&#39;">
-        <div class="admin-photo-info">
-          <div class="admin-photo-sport">Softball</div>
-          <div class="admin-photo-url">https://lh3.googleusercontent.com/d/1TM1VhD3-_sqmm80aIOa-ull7hsrYVBTb</div>
-          
-        </div>
-        <button class="admin-delete-btn" onclick="deletePhoto(18)">Delete</button></div><div class="admin-photo-item">
-        <img class="admin-thumb" src="./index_files/Copy of DSC_4815.jpg" alt="" onerror="this.style.display=&#39;none&#39;">
-        <div class="admin-photo-info">
-          <div class="admin-photo-sport">Softball</div>
-          <div class="admin-photo-url">https://lh3.googleusercontent.com/d/1GOLTJ4GOpLqjlX-4cxcR4F2rnt1UtCVL</div>
-          
-        </div>
-        <button class="admin-delete-btn" onclick="deletePhoto(19)">Delete</button></div><div class="admin-photo-item">
-        <img class="admin-thumb" src="./index_files/DSC_4252.jpg" alt="" onerror="this.style.display=&#39;none&#39;">
-        <div class="admin-photo-info">
-          <div class="admin-photo-sport">Softball</div>
-          <div class="admin-photo-url">https://lh3.googleusercontent.com/d/1rXnK-nELohLoaaQ9PKiLPyLD_8JcoeEk</div>
-          
-        </div>
-        <button class="admin-delete-btn" onclick="deletePhoto(20)">Delete</button></div><div class="admin-photo-item">
-        <img class="admin-thumb" src="./index_files/DSC_4341.jpg" alt="" onerror="this.style.display=&#39;none&#39;">
-        <div class="admin-photo-info">
-          <div class="admin-photo-sport">Softball</div>
-          <div class="admin-photo-url">https://lh3.googleusercontent.com/d/1X0SCChD8VLRpyj41NhqfpqHK4I0EtHjo</div>
-          
-        </div>
-        <button class="admin-delete-btn" onclick="deletePhoto(21)">Delete</button></div><div class="admin-photo-item">
-        <img class="admin-thumb" src="./index_files/DSC_4403.jpg" alt="" onerror="this.style.display=&#39;none&#39;">
-        <div class="admin-photo-info">
-          <div class="admin-photo-sport">Softball</div>
-          <div class="admin-photo-url">https://lh3.googleusercontent.com/d/1CQNdvO8xRuCEo4TE4PS-PGdxkjVbm0vR</div>
-          
-        </div>
-        <button class="admin-delete-btn" onclick="deletePhoto(22)">Delete</button></div><div class="admin-photo-item">
-        <img class="admin-thumb" src="./index_files/DSC_6572.jpg" alt="" onerror="this.style.display=&#39;none&#39;">
-        <div class="admin-photo-info">
-          <div class="admin-photo-sport">Softball</div>
-          <div class="admin-photo-url">https://lh3.googleusercontent.com/d/17rc9ByNnTTaF6of5qf71-_xGaDMIXey0</div>
-          
-        </div>
-        <button class="admin-delete-btn" onclick="deletePhoto(23)">Delete</button></div><div class="admin-photo-item">
-        <img class="admin-thumb" src="./index_files/DSC_6686.jpg" alt="" onerror="this.style.display=&#39;none&#39;">
-        <div class="admin-photo-info">
-          <div class="admin-photo-sport">Softball</div>
-          <div class="admin-photo-url">https://lh3.googleusercontent.com/d/1yR0VNAk6ysVMPQypaecYO8IBOSG-WhYb</div>
-          
-        </div>
-        <button class="admin-delete-btn" onclick="deletePhoto(24)">Delete</button></div></div>
+        <h4 id="photoListLabel">Current Photos (0)</h4>
+        <div class="admin-photo-items" id="adminPhotoItems"></div>
       </div>
 
     </div>
@@ -784,11 +609,19 @@
   // ─────────────────────────────────────────────────────────────
 
   const SPORT_META = {
-    football:   { icon: '🏈', label: 'Football',   bg: 'linear-gradient(135deg,#0d1a2a,#080f18)' },
-    basketball: { icon: '🏀', label: 'Basketball', bg: 'linear-gradient(135deg,#1c0e07,#110806)' },
-    '7v7':      { icon: '🏃', label: '7v7',        bg: 'linear-gradient(135deg,#0a1a0a,#071007)' },
-    softball:   { icon: '🥎', label: 'Softball',   bg: 'linear-gradient(135deg,#1a180a,#100f07)' },
+    football:   { icon: '🏈', label: 'Football',      bg: 'linear-gradient(135deg,#0d1a2a,#080f18)' },
+    basketball: { icon: '🏀', label: 'Basketball',    bg: 'linear-gradient(135deg,#1c0e07,#110806)' },
+    flag:       { icon: '🚩', label: 'Flag Football', bg: 'linear-gradient(135deg,#1a0d1a,#100810)' },
+    softball:   { icon: '🥎', label: 'Softball',      bg: 'linear-gradient(135deg,#1a180a,#100f07)' },
   };
+
+  // Cloudinary URL optimizer — fast thumbnails for grid, full-res for lightbox
+  function clThumb(url) {
+    return url.replace('/upload/', '/upload/f_auto,q_auto,w_800,c_fill,g_auto/');
+  }
+  function clFull(url) {
+    return url.replace('/upload/', '/upload/f_auto,q_auto,w_1600/');
+  }
 
   // ─── Photo storage ───────────────────────────────────────────
   function loadPhotos() {
@@ -814,12 +647,34 @@
   }
 
   const DEFAULT_PHOTOS = [
-    { url: '', sport: 'football',   label: 'Game Day',      featured: true  },
-    { url: '', sport: 'basketball', label: 'Action Shot',   featured: false },
-    { url: '', sport: '7v7',        label: 'Route Running', featured: false },
-    { url: '', sport: 'softball',   label: 'Game Day',      featured: false },
-    { url: '', sport: 'football',   label: 'Sideline',      featured: false },
-    { url: '', sport: 'basketball', label: 'Game Day',      featured: false },
+    // Football (6)
+    { url: 'https://res.cloudinary.com/dcs11qnzc/image/upload/v1782338871/DSC_7136_xgpa2f.jpg',       sport: 'football',   label: 'Game Day',   featured: true  },
+    { url: 'https://res.cloudinary.com/dcs11qnzc/image/upload/v1782338870/DSC_6735_b11vr8.jpg',       sport: 'football',   label: 'Action',     featured: false },
+    { url: 'https://res.cloudinary.com/dcs11qnzc/image/upload/v1782338870/DSC_3702_copy_yndjkk.jpg',  sport: 'football',   label: 'Game Day',   featured: false },
+    { url: 'https://res.cloudinary.com/dcs11qnzc/image/upload/v1782338870/DSC_4368_rvczo2.jpg',       sport: 'football',   label: 'Action',     featured: false },
+    { url: 'https://res.cloudinary.com/dcs11qnzc/image/upload/v1782338870/DSC_4143_copy_oxlqhp.jpg',  sport: 'football',   label: 'Sideline',   featured: false },
+    { url: 'https://res.cloudinary.com/dcs11qnzc/image/upload/v1782338869/DSC_2619_zlevpc.jpg',       sport: 'football',   label: 'Game Day',   featured: false },
+    // Basketball (6)
+    { url: 'https://res.cloudinary.com/dcs11qnzc/image/upload/v1782338772/DSC_7965_zxlq6a.jpg',       sport: 'basketball', label: 'Game Day',   featured: false },
+    { url: 'https://res.cloudinary.com/dcs11qnzc/image/upload/v1782338771/DSC_7625_qovmwp.jpg',       sport: 'basketball', label: 'Action',     featured: false },
+    { url: 'https://res.cloudinary.com/dcs11qnzc/image/upload/v1782338771/Copy_of_DSC_8591_hp6sdl.jpg', sport: 'basketball', label: 'Game Day', featured: false },
+    { url: 'https://res.cloudinary.com/dcs11qnzc/image/upload/v1782338771/Copy_of_DSC_9051_1_ze6epy.jpg', sport: 'basketball', label: 'Action', featured: false },
+    { url: 'https://res.cloudinary.com/dcs11qnzc/image/upload/v1782338771/Copy_of_DSC_2834_babcpw.jpg', sport: 'basketball', label: 'Game Day', featured: false },
+    { url: 'https://res.cloudinary.com/dcs11qnzc/image/upload/v1782338770/Copy_of_DSC_8426_dpmfgb.jpg', sport: 'basketball', label: 'Action',  featured: false },
+    // Flag Football (5)
+    { url: 'https://res.cloudinary.com/dcs11qnzc/image/upload/v1782338487/DSC_2477_a7qqzr.jpg',       sport: 'flag',       label: 'Game Day',   featured: false },
+    { url: 'https://res.cloudinary.com/dcs11qnzc/image/upload/v1782338484/DSC_2508_zpithm.jpg',       sport: 'flag',       label: 'Action',     featured: false },
+    { url: 'https://res.cloudinary.com/dcs11qnzc/image/upload/v1782338469/DSC_6483_lfeow9.jpg',       sport: 'flag',       label: 'Game Day',   featured: false },
+    { url: 'https://res.cloudinary.com/dcs11qnzc/image/upload/v1782338467/DSC_2002_fbssaf.jpg',       sport: 'flag',       label: 'Action',     featured: false },
+    { url: 'https://res.cloudinary.com/dcs11qnzc/image/upload/v1782338467/DSC_1274_fcoubx.jpg',       sport: 'flag',       label: 'Game Day',   featured: false },
+    // Softball (7)
+    { url: 'https://res.cloudinary.com/dcs11qnzc/image/upload/v1782338960/DSC_6686_pqpovq.jpg',       sport: 'softball',   label: 'Game Day',   featured: false },
+    { url: 'https://res.cloudinary.com/dcs11qnzc/image/upload/v1782338959/DSC_6572_n9qd1n.jpg',       sport: 'softball',   label: 'Action',     featured: false },
+    { url: 'https://res.cloudinary.com/dcs11qnzc/image/upload/v1782338959/DSC_4403_dpnics.jpg',       sport: 'softball',   label: 'Game Day',   featured: false },
+    { url: 'https://res.cloudinary.com/dcs11qnzc/image/upload/v1782338958/DSC_4341_vnaqzg.jpg',       sport: 'softball',   label: 'Action',     featured: false },
+    { url: 'https://res.cloudinary.com/dcs11qnzc/image/upload/v1782338958/DSC_4252_mv9fpl.jpg',       sport: 'softball',   label: 'Game Day',   featured: false },
+    { url: 'https://res.cloudinary.com/dcs11qnzc/image/upload/v1782338958/Copy_of_DSC_4815_fwjiu9.jpg', sport: 'softball', label: 'Action',     featured: false },
+    { url: 'https://res.cloudinary.com/dcs11qnzc/image/upload/v1782338957/Copy_of_DSC_4096_fyxzbu.jpg', sport: 'softball', label: 'Batting',    featured: false },
   ];
 
   function renderGallery() {
@@ -866,7 +721,8 @@
     div.onclick = () => openLB(globalIdx);
 
     if (photo.url) {
-      div.innerHTML = `<img src="${photo.url}" alt="${m.label}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      const thumb = photo.url.includes('cloudinary.com') ? clThumb(photo.url) : photo.url;
+      div.innerHTML = `<img src="${thumb}" alt="${m.label}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
         <div class="pf-placeholder" style="display:none;background:${m.bg}"><div class="pf-placeholder-icon">${m.icon}</div><div class="pf-placeholder-label">${photo.label || m.label}</div></div>`;
     } else {
       div.innerHTML = `<div class="pf-placeholder" style="background:${m.bg}"><div class="pf-placeholder-icon">${m.icon}</div><div class="pf-placeholder-label">${photo.label || m.label}</div></div>`;
@@ -902,7 +758,8 @@
     const wrap = document.getElementById('lbImgWrap');
     wrap.style.background = m.bg;
     if (p.url) {
-      wrap.innerHTML = `<img src="${p.url}" alt="${m.label}" style="max-width:100%;max-height:80vh;width:auto;height:auto;object-fit:contain;display:block;" onerror="this.parentElement.innerHTML='<div class=\\'lb-placeholder\\'><div class=\\'lb-placeholder-icon\\'>${m.icon}</div><div class=\\'lb-sport\\'>${m.label}</div></div>'">`;
+      const lbSrc = p.url.includes('cloudinary.com') ? clFull(p.url) : p.url;
+      wrap.innerHTML = `<img src="${lbSrc}" alt="${m.label}" style="max-width:100%;max-height:80vh;width:auto;height:auto;object-fit:contain;display:block;" onerror="this.parentElement.innerHTML='<div class=\\'lb-placeholder\\'><div class=\\'lb-placeholder-icon\\'>${m.icon}</div><div class=\\'lb-sport\\'>${m.label}</div></div>'">`;
     } else {
       wrap.innerHTML = `<div class="lb-placeholder"><div class="lb-placeholder-icon">${m.icon}</div><div class="lb-sport">${m.label} · ${p.label || ''}</div></div>`;
     }
